@@ -1,11 +1,11 @@
-/* ===== RESET AND BASE STYLES ===== */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap");
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* ===== ANIMATIONS ===== */
 @keyframes pulse {
   0%,
   100% {
@@ -39,31 +39,83 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, sans-serif;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, sans-serif;
   line-height: 1.7;
-  color: #2d2d2d;
-  background: radial-gradient(
-      circle at 20% 80%,
-      rgba(222, 184, 135, 0.3) 0%,
-      transparent 50%
-    ),
-    radial-gradient(
-      circle at 80% 20%,
-      rgba(245, 222, 179, 0.25) 0%,
-      transparent 50%
-    ),
-    radial-gradient(
-      circle at 40% 40%,
-      rgba(210, 180, 140, 0.2) 0%,
-      transparent 50%
-    ),
-    linear-gradient(135deg, #f5deb3 0%, #8b7355 100%);
+  color: #000000;
+  background: #faf7f0;
   background-attachment: fixed;
   min-height: 100vh;
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===== MODERN TYPOGRAPHY ===== */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Poppins", "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 600;
+  line-height: 1.2;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+}
+
+h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+h4 {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+h5 {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+h6 {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+/* Monospace font for code elements */
+code,
+pre,
+.code,
+.monospace {
+  font-family: "JetBrains Mono", Consolas, Monaco, monospace;
+}
+
+/* Enhanced body text styling */
+p {
+  margin-bottom: 1rem;
+  font-weight: 400;
+}
+
+/* Button text styling */
+button,
+.btn {
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
 }
 
 .container {
@@ -133,9 +185,31 @@ header .container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.2rem 20px;
+  padding: 1.8rem 20px;
 }
 
+/* Logo container */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Logo image */
+.logo-image {
+  height: 80px;
+  width: auto;
+  max-width: 400px;
+  object-fit: contain;
+  filter: brightness(1.1) drop-shadow(0 2px 4px rgba(255, 255, 255, 0.2));
+  transition: filter 0.3s ease;
+}
+
+.logo-image:hover {
+  filter: brightness(1.2) drop-shadow(0 4px 8px rgba(255, 255, 255, 0.3));
+}
+
+/* Logo text (can be used with or without image) */
 .logo h1 {
   background: linear-gradient(135deg, #fff 0%, #f0f8ff 100%);
   -webkit-background-clip: text;
@@ -148,16 +222,42 @@ header .container {
   text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
 }
 
+/* When logo image is present, make text smaller */
+.logo.has-image h1 {
+  font-size: 1.5rem;
+  margin-left: 0.5rem;
+}
+
 .logo-link {
   text-decoration: none;
   color: inherit;
   display: flex;
   align-items: center;
+  gap: 0.5rem;
 }
 
 .logo-link:hover,
 .logo-link:focus {
   filter: drop-shadow(0 4px 8px rgba(255, 255, 255, 0.2));
+}
+
+/* Responsive logo adjustments */
+@media (max-width: 768px) {
+  .logo-image {
+    height: 64px;
+  }
+
+  .logo h1 {
+    font-size: 1.5rem;
+  }
+
+  .logo.has-image h1 {
+    font-size: 1.2rem;
+  }
+
+  header .container {
+    padding: 1.5rem 15px;
+  }
 }
 
 /* ===== MODERN NAVIGATION ===== */
@@ -172,20 +272,47 @@ nav ul {
 
 nav a {
   text-decoration: none;
-  color: rgba(255, 255, 255, 0.9);
+  color: #000000;
+  background: rgba(255, 255, 255, 0.9);
   font-weight: 600;
-  font-size: 0.95rem;
-  padding: 0.75rem 1.25rem;
-  border-radius: 12px;
+  font-size: 0.75rem;
+  padding: 0.35rem 1.2rem;
+  border-radius: 10px;
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 nav a:hover,
 nav a:focus {
-  color: #fff;
-  background: rgba(255, 255, 255, 0.15);
-  border-color: rgba(255, 255, 255, 0.3);
+  color: #000000;
+  background: rgba(255, 255, 255, 1);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Auth navigation (login/logout) styling to match nav links */
+#authNav a,
+#authNav button {
+  text-decoration: none;
+  color: #000000;
+  background: rgba(255, 255, 255, 0.9);
+  font-weight: 600;
+  font-size: 0.75rem;
+  padding: 0.35rem 1.2rem;
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.3s ease;
+}
+
+#authNav a:hover,
+#authNav a:focus,
+#authNav button:hover,
+#authNav button:focus {
+  color: #000000;
+  background: rgba(255, 255, 255, 1);
+  border-color: rgba(255, 255, 255, 0.5);
 }
 
 .cart-link {
@@ -194,23 +321,21 @@ nav a:focus {
 
 .cart-count {
   position: absolute;
-  top: -5px;
-  right: -5px;
-  background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+  top: -8px;
+  right: -8px;
+  background: #dc143c;
   color: white;
   border-radius: 50%;
-  width: 22px;
-  height: 22px;
+  width: 20px;
+  height: 20px;
   display: none;
   align-items: center;
   justify-content: center;
-  font-size: 0.75rem;
+  font-size: 0.65rem;
   font-weight: 700;
-  box-shadow: 0 4px 12px rgba(255, 107, 107, 0.4);
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  animation: pulse 2s infinite;
-  font-weight: bold;
-  min-height: 20px;
+  line-height: 20px;
+  text-align: center;
+  font-family: Arial, sans-serif;
 }
 
 .cart-count[aria-label] {
@@ -302,11 +427,11 @@ nav a:focus {
 
 /* ===== MODERN BUTTONS ===== */
 .btn {
-  padding: 0.875rem 1.75rem;
+  padding: 0.625rem 2rem;
   border: none;
   border-radius: 16px;
   cursor: pointer;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 600;
   text-decoration: none;
   display: inline-flex;
@@ -314,8 +439,8 @@ nav a:focus {
   justify-content: center;
   text-align: center;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  line-height: 1.4;
-  min-height: 48px;
+  line-height: 1.3;
+  min-height: 40px;
   border: 2px solid transparent;
   position: relative;
   overflow: hidden;
@@ -442,7 +567,7 @@ nav a:focus {
 .product-card {
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 2px solid #000000;
   border-radius: 24px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15),
     inset 0 1px 0 rgba(255, 255, 255, 0.5);
@@ -452,20 +577,7 @@ nav a:focus {
 }
 
 .product-card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.8),
-    transparent
-  );
-  opacity: 0;
-  transition: opacity 0.3s ease;
+  display: none;
 }
 
 .product-card:hover::before {
@@ -538,25 +650,12 @@ nav a:focus {
 
 .product-info {
   padding: 2rem 1.5rem;
-  background: linear-gradient(
-    145deg,
-    rgba(255, 255, 255, 0.9),
-    rgba(248, 250, 252, 0.8)
-  );
+  background: transparent;
   position: relative;
 }
 
 .product-info::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60px;
-  height: 3px;
-  background: linear-gradient(135deg, #8b7355, #2d2d2d);
-  border-radius: 2px;
-  opacity: 0.3;
+  display: none;
 }
 
 .product-title {
@@ -582,10 +681,7 @@ nav a:focus {
 .discounted-price {
   font-size: 1.4rem;
   font-weight: 700;
-  background: linear-gradient(135deg, #ff6b6b, #ee5a52);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #dc143c;
   margin: 0;
 }
 
@@ -600,12 +696,7 @@ nav a:focus {
 .price {
   font-size: 1.4rem;
   font-weight: 700;
-  background: linear-gradient(135deg, #2d2d2d, #8b7355);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  font-weight: bold;
-  color: #2c3e50;
+  color: #000000;
 }
 
 .product-description {
@@ -666,7 +757,7 @@ nav a:focus {
 
 .product-actions .btn {
   flex: 1;
-  min-width: 130px;
+  min-width: 150px;
   position: relative;
   overflow: hidden;
 }
@@ -684,7 +775,7 @@ nav a:focus {
   border-radius: 24px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15),
     inset 0 1px 0 rgba(255, 255, 255, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 2px solid #000000;
   display: flex;
   gap: 1.5rem;
   align-items: center;
@@ -853,6 +944,64 @@ nav a:focus {
   margin-bottom: 1.5rem;
   text-align: center;
   letter-spacing: -0.02em;
+}
+
+/* ===== LOGIN REQUIREMENT (CART) ===== */
+.login-requirement {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 2px solid rgba(141, 115, 85, 0.2);
+}
+
+.login-prompt {
+  text-align: center;
+  padding: 1.5rem;
+  background: linear-gradient(
+    135deg,
+    rgba(141, 115, 85, 0.1),
+    rgba(45, 45, 45, 0.05)
+  );
+  border-radius: 16px;
+  border: 1px solid rgba(141, 115, 85, 0.2);
+}
+
+.login-prompt h3 {
+  color: #2d2d2d;
+  margin-bottom: 0.8rem;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.login-prompt p {
+  color: #666;
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+}
+
+.login-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.or-divider {
+  color: #8b7355;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.login-prompt small {
+  color: #8b7355;
+  font-size: 0.85rem;
+  font-style: italic;
+}
+
+.checkout-section.hidden,
+.login-requirement.hidden {
+  display: none;
 }
 
 /* ===== AUTH FORMS ===== */
@@ -1264,6 +1413,7 @@ nav a:focus {
 
 .feature-card {
   background: white;
+  border: 2px solid #000000;
   padding: 2rem;
   border-radius: 8px;
   text-align: center;
@@ -1320,6 +1470,7 @@ nav a:focus {
 
 .product-preview-card {
   background: white;
+  border: 2px solid #000000;
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -1364,12 +1515,12 @@ nav a:focus {
 }
 
 .price {
-  color: #27ae60;
+  color: #000000;
   font-size: 1.1rem;
 }
 
 .price-discounted {
-  color: #e74c3c;
+  color: #dc143c;
   font-size: 1.1rem;
   margin-right: 0.5rem;
 }
@@ -1625,7 +1776,7 @@ nav a[aria-current="page"] {
 }
 
 .discount-price {
-  color: #e74c3c;
+  color: #dc143c;
   font-weight: bold;
   margin-top: 0.5rem;
 }
@@ -1698,25 +1849,14 @@ nav a[aria-current="page"] {
   border-radius: 32px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15),
     inset 0 1px 0 rgba(255, 255, 255, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 2px solid #000000;
   animation: slideIn 0.8s ease-out;
   position: relative;
   overflow: hidden;
 }
 
 .product-detail::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(0, 0, 0, 0.5),
-    transparent
-  );
+  display: none;
 }
 
 .product-detail-image {
@@ -1782,10 +1922,7 @@ nav a[aria-current="page"] {
 .product-price-section .discounted-price {
   font-size: 2.2rem;
   font-weight: 800;
-  background: linear-gradient(135deg, #ff6b6b, #ee5a52);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #dc143c;
   display: inline-block;
 }
 
@@ -1800,10 +1937,7 @@ nav a[aria-current="page"] {
 .product-price-section .price {
   font-size: 2.2rem;
   font-weight: 800;
-  background: linear-gradient(135deg, #2d2d2d, #8b7355);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #000000;
   display: inline-block;
 }
 
@@ -1812,11 +1946,8 @@ nav a[aria-current="page"] {
   line-height: 1.8;
   color: #4a5568;
   margin: 2rem 0;
-  padding: 1.5rem;
-  background: rgba(248, 250, 252, 0.8);
-  border-radius: 16px;
-  border-left: 4px solid #2d2d2d;
-  backdrop-filter: blur(10px);
+  padding: 0;
+  background: transparent;
 }
 
 .product-tags {
@@ -2016,7 +2147,7 @@ nav a[aria-current="page"] {
   top: 0;
   left: 0;
   width: 100%;
-  background: linear-gradient(135deg, #2d2d2d 0%, #8b7355 100%);
+  background: #c2a2a8;
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.8s ease, visibility 0.8s ease;
@@ -2075,16 +2206,16 @@ nav a[aria-current="page"] {
 .slide-text h2 {
   font-size: 2.8rem;
   font-weight: 700;
-  color: white;
+  color: #000000;
   margin-bottom: 1rem;
   line-height: 1.2;
-  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  text-shadow: none;
   max-width: 90%;
 }
 
 .slide-text p {
   font-size: 1.1rem;
-  color: rgba(255, 255, 255, 0.85);
+  color: #000000;
   margin-bottom: 1.5rem;
   line-height: 1.5;
   max-width: 85%;
@@ -2100,7 +2231,7 @@ nav a[aria-current="page"] {
 .slide-price .discounted-price {
   font-size: 2.2rem;
   font-weight: 700;
-  color: #ff6b6b;
+  color: #dc143c;
   text-shadow: 0 2px 15px rgba(0, 0, 0, 0.4);
 }
 
@@ -2282,7 +2413,7 @@ nav a[aria-current="page"] {
 .feed-product-card {
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 2px solid #000000;
   border-radius: 20px;
   overflow: hidden;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -2364,10 +2495,7 @@ nav a[aria-current="page"] {
 .feed-discounted-price {
   font-size: 1.2rem;
   font-weight: 700;
-  background: linear-gradient(135deg, #ff6b6b, #ee5a52);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #dc143c;
 }
 
 .feed-original-price {
@@ -2379,10 +2507,7 @@ nav a[aria-current="page"] {
 .feed-price {
   font-size: 1.2rem;
   font-weight: 700;
-  background: linear-gradient(135deg, #2d2d2d, #8b7355);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #000000;
 }
 
 /* Feed Actions */

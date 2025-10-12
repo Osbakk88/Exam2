@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Your shopping cart" />
     <title>Shopping Cart - Online Shop</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="css/styles.css" />
   </head>
   <body>
@@ -12,9 +19,13 @@
     <header>
       <div class="container">
         <div class="logo">
-          <h1>
-            <a href="index.html" class="logo-link">Online Shop</a>
-          </h1>
+          <a href="index.html" class="logo-link">
+            <img
+              src="images/FullLogo_Transparent_NoBuffer (5).png"
+              alt="Logo"
+              class="logo-image"
+            />
+          </a>
         </div>
         <nav>
           <ul>
@@ -43,11 +54,14 @@
 
       <div id="cartSummary" class="cart-summary hidden">
         <div class="cart-total">Total: <span id="cartTotal">$0.00</span></div>
+
+        <!-- Checkout section - will be updated based on login status -->
+        <div id="checkoutArea">
+          <!-- Content will be populated by JavaScript -->
+        </div>
+
         <div class="flex-gap-mt">
           <button id="clearCartBtn" class="btn btn-danger">Clear Cart</button>
-          <button id="checkoutBtn" class="btn btn-primary flex-grow">
-            Proceed to Checkout
-          </button>
         </div>
       </div>
     </main>

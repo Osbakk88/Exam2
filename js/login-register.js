@@ -82,7 +82,7 @@ function fillCredentials(email, password) {
   const message = document.getElementById("loginMessage");
   message.innerHTML = `
     <div class="notification success">
-      <p>✅ Credentials filled! Click "Login" to sign in.</p>
+      <p>Credentials filled! Click "Login" to sign in.</p>
     </div>
   `;
 }
@@ -97,7 +97,7 @@ async function createNewDemoAccount() {
   const message = document.getElementById("loginMessage");
   message.innerHTML = `
     <div class="notification info">
-      <p>🔄 Creating new demo account...</p>
+      <p>Creating new demo account...</p>
     </div>
   `;
 
@@ -109,7 +109,7 @@ async function createNewDemoAccount() {
 
     message.innerHTML = `
       <div class="notification success">
-        <p>✅ New account created and ready!<br>
+        <p>New account created and ready!<br>
         <strong>Email:</strong> ${email}<br>
         <strong>Password:</strong> ${password}<br>
         Click "Login" to sign in.</p>
@@ -118,7 +118,7 @@ async function createNewDemoAccount() {
   } catch (error) {
     message.innerHTML = `
       <div class="notification error">
-        <p>❌ Failed to create account: ${error.message}</p>
+        <p>Failed to create account: ${error.message}</p>
       </div>
     `;
   }
@@ -140,7 +140,7 @@ async function handleLogin(e) {
 
   message.innerHTML = `
     <div class="notification info">
-      <p>🔄 Signing you in...</p>
+      <p>Signing you in...</p>
     </div>
   `;
 
@@ -150,7 +150,7 @@ async function handleLogin(e) {
     if (result.success) {
       message.innerHTML = `
         <div class="notification success">
-          <p>✅ Login successful! Redirecting...</p>
+          <p>Login successful! Redirecting...</p>
         </div>
       `;
 
@@ -162,12 +162,25 @@ async function handleLogin(e) {
       }
 
       setTimeout(() => {
-        window.location.href = "shop.html";
+        // Check if user was trying to checkout before login
+        const pendingCheckout = localStorage.getItem("pendingCheckout");
+        const returnUrl = localStorage.getItem("returnUrl");
+
+        if (pendingCheckout === "true" && returnUrl) {
+          // Clear the pending checkout flags
+          localStorage.removeItem("pendingCheckout");
+          localStorage.removeItem("returnUrl");
+          // Redirect to checkout
+          window.location.href = returnUrl;
+        } else {
+          // Normal redirect to shop
+          window.location.href = "shop.html";
+        }
       }, 1500);
     } else {
       message.innerHTML = `
         <div class="notification error">
-          <p>❌ Login failed: ${result.error}</p>
+          <p>Login failed: ${result.error}</p>
         </div>
       `;
     }
@@ -175,7 +188,7 @@ async function handleLogin(e) {
     console.error("Login error:", error);
     message.innerHTML = `
       <div class="notification error">
-        <p>❌ Login error: ${error.message}</p>
+        <p>Login error: ${error.message}</p>
       </div>
     `;
   } finally {
@@ -199,7 +212,7 @@ async function handleRegister(e) {
   if (!name.match(/^[a-zA-Z0-9_]+$/)) {
     message.innerHTML = `
       <div class="notification error">
-        <p>❌ Name can only contain letters, numbers, and underscore (_)</p>
+        <p>Name can only contain letters, numbers, and underscore (_)</p>
       </div>
     `;
     return;
@@ -208,7 +221,7 @@ async function handleRegister(e) {
   if (!email.endsWith("@stud.noroff.no")) {
     message.innerHTML = `
       <div class="notification error">
-        <p>❌ Email must be @stud.noroff.no</p>
+        <p>Email must be @stud.noroff.no</p>
       </div>
     `;
     return;
@@ -217,7 +230,7 @@ async function handleRegister(e) {
   if (password !== confirmPassword) {
     message.innerHTML = `
       <div class="notification error">
-        <p>❌ Passwords do not match</p>
+        <p>Passwords do not match</p>
       </div>
     `;
     return;
@@ -226,7 +239,7 @@ async function handleRegister(e) {
   if (password.length < 8) {
     message.innerHTML = `
       <div class="notification error">
-        <p>❌ Password must be at least 8 characters</p>
+        <p>Password must be at least 8 characters</p>
       </div>
     `;
     return;
@@ -239,7 +252,7 @@ async function handleRegister(e) {
 
   message.innerHTML = `
     <div class="notification info">
-      <p>🔄 Creating your account...</p>
+      <p>Creating your account...</p>
     </div>
   `;
 
@@ -249,7 +262,7 @@ async function handleRegister(e) {
     if (result.success) {
       message.innerHTML = `
         <div class="notification success">
-          <p>✅ Account created successfully!<br>
+          <p>Account created successfully!<br>
           You can now switch to the Login tab to sign in.</p>
         </div>
       `;
@@ -268,14 +281,14 @@ async function handleRegister(e) {
         const loginMessage = document.getElementById("loginMessage");
         loginMessage.innerHTML = `
           <div class="notification success">
-            <p>✅ Account created! Credentials filled. Click "Login" to sign in.</p>
+            <p>Account created! Credentials filled. Click "Login" to sign in.</p>
           </div>
         `;
       }, 2000);
     } else {
       message.innerHTML = `
         <div class="notification error">
-          <p>❌ Registration failed: ${result.error}</p>
+          <p>Registration failed: ${result.error}</p>
         </div>
       `;
     }
@@ -288,7 +301,7 @@ async function handleRegister(e) {
 
     message.innerHTML = `
       <div class="notification error">
-        <p>❌ Registration error: ${errorMsg}</p>
+        <p>Registration error: ${errorMsg}</p>
       </div>
     `;
   } finally {

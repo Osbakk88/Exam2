@@ -8,6 +8,13 @@
       content="Welcome to Online Shop - Browse our collection of electronics and accessories"
     />
     <title>Online Shop</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="css/styles.css" />
   </head>
   <body>
@@ -17,7 +24,11 @@
       <div class="container">
         <div class="logo">
           <a href="index.html" class="logo-link">
-            <h1>Online Shop</h1>
+            <img
+              src="images/FullLogo_Transparent_NoBuffer (5).png"
+              alt="Logo"
+              class="logo-image"
+            />
           </a>
         </div>
         <nav>
@@ -31,19 +42,7 @@
               </a>
             </li>
             <li id="authNav">
-              <button
-                onclick="window.location.href='login.html'"
-                style="
-                  background: none;
-                  border: none;
-                  color: inherit;
-                  cursor: pointer;
-                  font-size: inherit;
-                  text-decoration: underline;
-                "
-              >
-                Login
-              </button>
+              <a href="login.html">Login</a>
             </li>
           </ul>
         </nav>
@@ -76,32 +75,14 @@
               id="prevBtn"
               aria-label="Previous product"
             >
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <polyline points="15,18 9,12 15,6"></polyline>
-              </svg>
+              ←
             </button>
             <button
               class="carousel-btn carousel-btn-next"
               id="nextBtn"
               aria-label="Next product"
             >
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <polyline points="9,18 15,12 9,6"></polyline>
-              </svg>
+              →
             </button>
 
             <!-- Carousel Indicators -->

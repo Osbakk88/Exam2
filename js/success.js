@@ -17,14 +17,12 @@ function updateNavigation() {
   const authNav = document.getElementById("authNav");
 
   if (API.Auth.isLoggedIn()) {
-    const user = API.Auth.getCurrentUser();
     authNav.innerHTML = `
-      <span>Welcome, ${user.name}!</span>
       <button class="btn btn-secondary ml-1" data-action="logout">Logout</button>
     `;
   } else {
     authNav.innerHTML = `
-      <a href="account/login.html">Login</a>
+      <a href="login.html">Login</a>
     `;
   }
 }

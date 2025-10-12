@@ -14,16 +14,17 @@ function updateNavigation() {
   const authNav = document.getElementById("authNav");
 
   if (API.Auth.isLoggedIn()) {
-    const user = API.Auth.getCurrentUser();
     authNav.innerHTML = `
-      <span>Welcome, ${user.name}!</span>
       <button class="btn btn-secondary ml-1" data-action="logout">Logout</button>
     `;
   } else {
     authNav.innerHTML = `
-      <a href="account/login.html">Login</a>
+      <a href="login.html">Login</a>
     `;
   }
+
+  // Update checkout area when navigation changes (login/logout)
+  updateCheckoutArea();
 }
 
 function displayCart() {
@@ -34,11 +35,13 @@ function displayCart() {
   if (cartItems.length === 0) {
     showEmptyCart(cartItemsContainer);
     cartSummary.classList.add("hidden");
+    updateCheckoutArea(); // Still need to show login requirement even with empty cart
     return;
   }
 
   populateCartItems(cartItemsContainer, cartItems);
   updateCartSummary();
+  updateCheckoutArea();
   cartSummary.classList.remove("hidden");
 }
 
@@ -185,11 +188,99 @@ function updateCartSummary() {
   totalElement.textContent = API.UI.formatPrice(total);
 }
 
+function updateCheckoutArea() {
+  const checkoutArea = document.getElementById("checkoutArea");
+
+  if (!checkoutArea) {
+    console.error("Checkout area element not found");
+    return;
+  }
+
+  if (API.Auth.isLoggedIn()) {
+    // User is logged in - show normal checkout button
+    checkoutArea.innerHTML = `
+      <div class="checkout-ready">
+        <p class="checkout-status">Ready to checkout</p>
+        <button id="checkoutBtn" class="btn btn-primary btn-full-width btn-large">
+          Proceed to Checkout
+        </button>
+      </div>
+    `;
+  } else {
+    // User not logged in - show login requirement
+    checkoutArea.innerHTML = `
+      <div class="login-required">
+        <div class="login-requirement-box">
+          <h4>🔐 Login Required to Purchase</h4>
+          <p>You must log in to complete your purchase.</p>
+          <button id="loginForCheckoutBtn" class="btn btn-primary btn-full-width">
+            Login to Checkout
+          </button>
+          <small>Your cart will be saved while you sign in.</small>
+        </div>
+      </div>
+    `;
+  }
+
+  // Re-attach event listeners after updating HTML
+  attachCheckoutEventListeners();
+}
+
+function attachCheckoutEventListeners() {
+  // Remove old listeners to avoid duplicates
+  const checkoutBtn = document.getElementById("checkoutBtn");
+  const loginBtn = document.getElementById("loginForCheckoutBtn");
+
+  if (checkoutBtn) {
+    checkoutBtn.addEventListener("click", function () {
+      // User is logged in, proceed to checkout
+      window.location.href = "checkout.html";
+    });
+  }
+
+  if (loginBtn) {
+    loginBtn.addEventListener("click", function () {
+      // Store checkout intent and redirect to login
+      localStorage.setItem("pendingCheckout", "true");
+      localStorage.setItem("returnUrl", "checkout.html");
+      window.location.href = "login.html";
+    });
+  }
+}
+
 function setupEventListeners() {
-  // Handle logout button
+  // Handle logout button with better error handling
   document.addEventListener("click", function (e) {
+    console.log(
+      "Click detected on:",
+      e.target,
+      "data-action:",
+      e.target.getAttribute("data-action")
+    );
+
     if (e.target.getAttribute("data-action") === "logout") {
-      API.Auth.logout();
+      e.preventDefault(); // Prevent any default behavior
+      console.log("Logout button clicked");
+
+      try {
+        if (
+          window.API &&
+          window.API.Auth &&
+          typeof window.API.Auth.logout === "function"
+        ) {
+          window.API.Auth.logout();
+        } else {
+          console.error("API.Auth.logout not available");
+          // Fallback manual logout
+          localStorage.clear();
+          window.location.reload();
+        }
+      } catch (error) {
+        console.error("Error during logout:", error);
+        // Fallback manual logout
+        localStorage.clear();
+        window.location.reload();
+      }
       return;
     }
   });
@@ -256,23 +347,6 @@ function setupEventListeners() {
         showNotification("Cart cleared");
       }
     });
-
-  // Checkout button
-  document.getElementById("checkoutBtn").addEventListener("click", function () {
-    if (!API.Auth.isLoggedIn()) {
-      if (
-        confirm(
-          "You need to be logged in to checkout. Would you like to login now?"
-        )
-      ) {
-        window.location.href = "account/login.html";
-      }
-      return;
-    }
-
-    // Redirect to checkout page
-    window.location.href = "checkout.html";
-  });
 
   // Listen for cart updates from other pages
   window.addEventListener("cartUpdated", function () {

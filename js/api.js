@@ -32,9 +32,7 @@ const DEFAULT_CREDENTIALS = {
 // Utility function to get stored auth data
 function getAuthData() {
   return {
-    accessToken:
-      localStorage.getItem(STORAGE_KEYS.accessToken) ||
-      DEFAULT_CREDENTIALS.accessToken,
+    accessToken: localStorage.getItem(STORAGE_KEYS.accessToken), // No fallback to default
     apiKey:
       localStorage.getItem(STORAGE_KEYS.apiKey) || DEFAULT_CREDENTIALS.apiKey,
   };
@@ -149,10 +147,20 @@ const Auth = {
 
   // Logout user
   logout() {
+    console.log("Logout function called");
+
+    // Clear all authentication data
     localStorage.removeItem(STORAGE_KEYS.accessToken);
     localStorage.removeItem(STORAGE_KEYS.apiKey);
     localStorage.removeItem(STORAGE_KEYS.user);
-    window.location.reload();
+    localStorage.removeItem(STORAGE_KEYS.cart); // Also clear cart
+
+    console.log("Authentication data cleared");
+
+    // Force reload to ensure clean state
+    setTimeout(() => {
+      window.location.reload();
+    }, 100);
   },
 
   // Check if user is logged in
@@ -557,25 +565,13 @@ const UI = {
 
 // Initialize app when DOM is loaded
 document.addEventListener("DOMContentLoaded", function () {
-  // Set default credentials if not already stored
-  if (!localStorage.getItem(STORAGE_KEYS.accessToken)) {
-    localStorage.setItem(
-      STORAGE_KEYS.accessToken,
-      DEFAULT_CREDENTIALS.accessToken
-    );
-  }
+  // Only set default API key if not already stored (for API calls)
   if (!localStorage.getItem(STORAGE_KEYS.apiKey)) {
     localStorage.setItem(STORAGE_KEYS.apiKey, DEFAULT_CREDENTIALS.apiKey);
   }
-  if (!localStorage.getItem(STORAGE_KEYS.user)) {
-    localStorage.setItem(
-      STORAGE_KEYS.user,
-      JSON.stringify({
-        name: "osbakk88",
-        email: "chrosb02397@stud.noroff.no",
-      })
-    );
-  }
+
+  // NOTE: Removed auto-login behavior - users must manually log in
+  // No longer automatically setting accessToken or user data
 
   // Update cart UI on page load
   Cart.updateCartUI();

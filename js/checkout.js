@@ -5,7 +5,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Check if user is logged in (required for checkout)
   if (!API.Auth.isLoggedIn()) {
-    window.location.href = "account/login.html";
+    // Store checkout intent and redirect to login
+    localStorage.setItem("pendingCheckout", "true");
+    localStorage.setItem("returnUrl", "checkout.html");
+    window.location.href = "login.html";
     return;
   }
 
@@ -16,22 +19,61 @@ document.addEventListener("DOMContentLoaded", function () {
   setupPaymentMethods();
   setupFormValidation();
   setupPlaceOrder();
+
+  // Setup logout functionality
+  setupLogoutHandler();
 });
 
 function updateNavigation() {
   const authNav = document.getElementById("authNav");
 
   if (API.Auth.isLoggedIn()) {
-    const user = API.Auth.getCurrentUser();
     authNav.innerHTML = `
-      <span>Welcome, ${user.name}!</span>
       <button class="btn btn-secondary ml-1" data-action="logout">Logout</button>
     `;
   } else {
     authNav.innerHTML = `
-      <a href="account/login.html">Login</a>
+      <a href="login.html">Login</a>
     `;
   }
+}
+
+function setupLogoutHandler() {
+  // Handle logout button clicks
+  document.addEventListener("click", function (e) {
+    console.log(
+      "Click detected on:",
+      e.target,
+      "data-action:",
+      e.target.getAttribute("data-action")
+    );
+
+    if (e.target.getAttribute("data-action") === "logout") {
+      e.preventDefault(); // Prevent any default behavior
+      console.log("Logout button clicked");
+
+      try {
+        if (
+          window.API &&
+          window.API.Auth &&
+          typeof window.API.Auth.logout === "function"
+        ) {
+          window.API.Auth.logout();
+        } else {
+          console.error("API.Auth.logout not available");
+          // Fallback manual logout
+          localStorage.clear();
+          window.location.reload();
+        }
+      } catch (error) {
+        console.error("Error during logout:", error);
+        // Fallback manual logout
+        localStorage.clear();
+        window.location.reload();
+      }
+      return;
+    }
+  });
 }
 
 function loadOrderSummary() {

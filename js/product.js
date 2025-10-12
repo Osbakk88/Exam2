@@ -24,12 +24,6 @@ function updateNavigation() {
   const authNav = document.getElementById("authNav");
 
   if (API.Auth.isLoggedIn()) {
-    const user = API.Auth.getCurrentUser();
-
-    // Create elements instead of innerHTML to attach event listeners
-    const welcomeSpan = document.createElement("span");
-    welcomeSpan.textContent = `Welcome, ${user.name}!`;
-
     const logoutBtn = document.createElement("button");
     logoutBtn.className = "btn btn-secondary margin-left";
     logoutBtn.textContent = "Logout";
@@ -38,11 +32,10 @@ function updateNavigation() {
     });
 
     authNav.innerHTML = "";
-    authNav.appendChild(welcomeSpan);
     authNav.appendChild(logoutBtn);
   } else {
     authNav.innerHTML = `
-      <a href="account/login.html">Login</a>
+      <a href="login.html">Login</a>
     `;
   }
 }
@@ -228,7 +221,7 @@ function displayProduct(product) {
     const loginPrompt = document.createElement("div");
     loginPrompt.className = "login-prompt";
     loginPrompt.innerHTML = `
-      <p>Please <a href="account/login.html">log in</a> to add items to your cart.</p>
+      <p>Please <a href="login.html">log in</a> to add items to your cart.</p>
     `;
     actionsDiv.appendChild(loginPrompt);
   }
