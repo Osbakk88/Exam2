@@ -241,7 +241,7 @@ function attachCheckoutEventListeners() {
     loginBtn.addEventListener("click", function () {
       // Store checkout intent and redirect to login
       localStorage.setItem("pendingCheckout", "true");
-      localStorage.setItem("returnUrl", "checkout.html");
+      localStorage.setItem("returnUrl", "cart.html");
       window.location.href = "login.html";
     });
   }

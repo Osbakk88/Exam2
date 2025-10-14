@@ -5,33 +5,13 @@ document.addEventListener("DOMContentLoaded", function () {
   // Initialize cart display
   API.Cart.updateCartUI();
 
-  // Check if already logged in - temporarily disabled for testing
+  // Check if already logged in - commented out for testing
   // if (API.Auth.isLoggedIn()) {
   //   window.location.href = 'shop.html';
   //   return;
   // }
 
-  // Tab switching functionality
-  const tabs = document.querySelectorAll(".auth-tab");
-  const forms = document.querySelectorAll(".auth-form");
-
-  tabs.forEach((tab) => {
-    tab.addEventListener("click", function () {
-      const targetTab = this.dataset.tab;
-
-      // Update tab appearance
-      tabs.forEach((t) => t.classList.remove("active"));
-      this.classList.add("active");
-
-      // Show correct form
-      forms.forEach((form) => {
-        form.classList.remove("active");
-        if (form.id === targetTab + "Form") {
-          form.classList.add("active");
-        }
-      });
-    });
-  });
+  // Tab switching functionality is handled by the switchTab function and onclick events
 
   // Pre-create demo accounts when page loads
   initializeDemoAccounts();
@@ -47,44 +27,48 @@ document.addEventListener("DOMContentLoaded", function () {
     .addEventListener("submit", handleRegister);
 });
 
-// Pre-create demo accounts
+// Pre-create demo accounts  
 async function initializeDemoAccounts() {
   console.log("🔧 Initializing demo accounts...");
-
+  
   const demoAccounts = [
     {
-      name: "AdminUser",
-      email: "admin_user@stud.noroff.no",
-      password: "admin123",
-    },
-    {
-      name: "DemoUser",
-      email: "demo_user@stud.noroff.no",
-      password: "password123",
+      name: "testuser123",
+      email: "testuser123@stud.noroff.no", 
+      password: "testpass123",
     },
   ];
 
   for (const account of demoAccounts) {
     try {
-      await API.Auth.register(account);
-      console.log(`✅ Demo account created: ${account.email}`);
+      const result = await API.Auth.register(account);
+      console.log(`✅ Test account created: ${account.email}`, result);
     } catch (error) {
-      console.log(`ℹ️ Demo account exists: ${account.email}`);
+      console.log(`ℹ️ Account registration failed or already exists: ${account.email}`, error);
     }
   }
 }
 
-// Fill login credentials
-function fillCredentials(email, password) {
-  document.getElementById("loginEmail").value = email;
-  document.getElementById("loginPassword").value = password;
+// Switch between login and register tabs
+function switchTab(tabName) {
+  const tabs = document.querySelectorAll(".auth-tab");
+  const forms = document.querySelectorAll(".auth-form");
 
-  const message = document.getElementById("loginMessage");
-  message.innerHTML = `
-    <div class="notification success">
-      <p>Credentials filled! Click "Login" to sign in.</p>
-    </div>
-  `;
+  // Update tab appearance
+  tabs.forEach((tab) => {
+    tab.classList.remove("active");
+    if (tab.getAttribute('data-tab') === tabName) {
+      tab.classList.add("active");
+    }
+  });
+
+  // Show correct form
+  forms.forEach((form) => {
+    form.classList.remove("active");
+    if (form.id === tabName + "Form") {
+      form.classList.add("active");
+    }
+  });
 }
 
 // Create new demo account
@@ -103,9 +87,6 @@ async function createNewDemoAccount() {
 
   try {
     await API.Auth.register({ name, email, password });
-
-    // Fill the credentials
-    fillCredentials(email, password);
 
     message.innerHTML = `
       <div class="notification success">
@@ -145,7 +126,9 @@ async function handleLogin(e) {
   `;
 
   try {
+    console.log("Attempting login with:", { email, password });
     const result = await API.Auth.login({ email, password });
+    console.log("Login result:", result);
 
     if (result.success) {
       message.innerHTML = `
