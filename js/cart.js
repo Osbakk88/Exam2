@@ -1,4 +1,5 @@
 // Cart page functionality
+// NOTE: AI assistance used for login redirect flow and checkout integration
 document.addEventListener("DOMContentLoaded", function () {
   // Update navigation based on login status
   updateNavigation();

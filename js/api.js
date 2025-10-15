@@ -1,4 +1,5 @@
 // API Configuration for Noroff Online Shop
+// NOTE: AI assistance used for API error handling improvements and authentication flow
 const API_BASE_URL = "https://v2.api.noroff.dev";
 
 // API Endpoints
@@ -94,7 +95,14 @@ async function apiCall(url, options = {}) {
     console.log("Response data:", data);
 
     if (!response.ok) {
-      throw new Error(data.message || `HTTP error! status: ${response.status}`);
+      // Create detailed error with API response information
+      const error = new Error(
+        data.message || `HTTP error! status: ${response.status}`
+      );
+      error.status = response.status;
+      error.errors = data.errors || [];
+      error.apiData = data;
+      throw error;
     }
 
     return { data, success: true };

@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login & Register - Online Shop</title>
+    <!-- NOTE: AI assistance used for login/register page design, form validation, and authentication integration -->
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -49,7 +50,7 @@
       /* Tab system styling */
       .auth-tabs {
         display: flex;
-        margin-bottom: 3rem !important;
+        margin-bottom: 5rem !important;
         background: #f8f9fa;
         border-radius: 10px;
         padding: 0.5rem;
@@ -72,6 +73,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        margin: 0 0.3rem !important;
       }
 
       .auth-tab.active {
@@ -83,6 +85,11 @@
       .auth-tab:hover:not(.active) {
         background: #fff;
         color: #333;
+      }
+
+      /* Add more space below the tab buttons */
+      .auth-tabs {
+        margin-bottom: 2.5rem !important;
       }
 
       /* Enhanced form styling */
@@ -146,9 +153,11 @@
       }
 
       /* Form container styling */
+      /* Form styling with more spacing */
       .auth-form {
         display: none;
         animation: fadeIn 0.3s ease-in-out;
+        padding-top: 2rem !important;
       }
 
       .auth-form.active {
@@ -188,7 +197,17 @@
       }
 
       .auth-form {
-        margin-bottom: 2rem;
+        margin-bottom: 3.5rem;
+        padding-bottom: 1.5rem;
+      }
+
+      #registerForm.auth-form {
+        margin-top: 4.5rem;
+      }
+
+      /* Stronger separation between login and register forms */
+      #loginForm.auth-form {
+        margin-bottom: 4.5rem;
       }
 
       /* Error/Success messages */
@@ -351,11 +370,29 @@
           <form id="registerFormElement">
             <div class="form-group">
               <label for="registerName">Full Name</label>
-              <input type="text" id="registerName" name="name" required />
+              <input
+                type="text"
+                id="registerName"
+                name="name"
+                required
+                placeholder="e.g. john_doe (no spaces)"
+              />
+              <small style="color: #666; font-size: 0.8rem"
+                >Use letters, numbers, and underscores only</small
+              >
             </div>
             <div class="form-group">
               <label for="registerEmail">Email Address</label>
-              <input type="email" id="registerEmail" name="email" required />
+              <input
+                type="email"
+                id="registerEmail"
+                name="email"
+                required
+                placeholder="yourname@stud.noroff.no"
+              />
+              <small style="color: #666; font-size: 0.8rem"
+                >Must end with @stud.noroff.no</small
+              >
             </div>
             <div class="form-group">
               <label for="registerPassword">Password</label>
@@ -363,6 +400,19 @@
                 type="password"
                 id="registerPassword"
                 name="password"
+                required
+                placeholder="Minimum 8 characters"
+              />
+              <small style="color: #666; font-size: 0.8rem"
+                >At least 8 characters recommended</small
+              >
+            </div>
+            <div class="form-group">
+              <label for="confirmPassword">Confirm Password</label>
+              <input
+                type="password"
+                id="confirmPassword"
+                name="confirmPassword"
                 required
               />
             </div>

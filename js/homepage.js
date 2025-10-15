@@ -1,4 +1,5 @@
 // Homepage functionality
+// NOTE: AI assistance used for currency formatting fixes and price display standardization
 let carouselProducts = [];
 let currentSlide = 0;
 let carouselInterval;
