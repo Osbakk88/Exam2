@@ -132,6 +132,7 @@ const Auth = {
 
     if (result.success) {
       localStorage.setItem(STORAGE_KEYS.accessToken, result.data.accessToken);
+      localStorage.setItem("profileName", result.data.name); // Following teacher's guidance
       localStorage.setItem(STORAGE_KEYS.user, JSON.stringify(result.data));
     }
 
@@ -159,6 +160,7 @@ const Auth = {
 
     // Clear all authentication data
     localStorage.removeItem(STORAGE_KEYS.accessToken);
+    localStorage.removeItem("profileName"); // Following teacher's guidance
     localStorage.removeItem(STORAGE_KEYS.apiKey);
     localStorage.removeItem(STORAGE_KEYS.user);
     localStorage.removeItem(STORAGE_KEYS.cart); // Also clear cart

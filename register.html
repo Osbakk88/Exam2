@@ -4,7 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Register - Online Shop</title>
-    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/login.css" />
   </head>
   <body>
     <header>
@@ -33,36 +35,28 @@
     <main class="container">
       <div class="auth-container">
         <h2>Register</h2>
-        <form id="registerForm">
+        <div id="registerMessage"></div>
+        <form id="registerFormElement">
           <div class="form-group">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required />
+            <label for="registerName">Name:</label>
+            <input type="text" id="registerName" name="name" required />
           </div>
 
           <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required />
+            <label for="registerEmail">Email:</label>
+            <input type="email" id="registerEmail" name="email" required />
           </div>
 
           <div class="form-group">
-            <label for="password">Password (min 8 characters):</label>
+            <label for="registerPassword">Password (min 8 characters):</label>
             <input
               type="password"
-              id="password"
+              id="registerPassword"
               name="password"
               minlength="8"
               required
             />
           </div>
-
-          <div class="form-group">
-            <label for="confirmPassword">Confirm Password:</label>
-            <input
-              type="password"
-              id="confirmPassword"
-              name="confirmPassword"
-              minlength="8"
-              required
             />
           </div>
 
@@ -71,8 +65,6 @@
           </button>
         </form>
 
-        <div id="registerMessage"></div>
-
         <p class="text-center margin-top">
           Already have an account? <a href="login.html">Login here</a>
         </p>
@@ -80,6 +72,6 @@
     </main>
 
     <script src="js/api.js"></script>
-    <script src="js/register.js"></script>
+    <script src="js/login-register.js"></script>
   </body>
 </html>

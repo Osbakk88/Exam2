@@ -3,6 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Login to your account or create a new account to start shopping with your @stud.noroff.no email."
+    />
     <title>Login & Register - Online Shop</title>
     <!-- NOTE: AI assistance used for login/register page design, form validation, and authentication integration -->
     <!-- Google Fonts -->
@@ -12,272 +16,9 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="css/styles.css" />
-    <style>
-      /* Enhanced login page styling */
-      .auth-container {
-        max-width: 600px !important;
-        margin: 3rem auto !important;
-        padding: 3rem !important;
-        background: white;
-        border-radius: 15px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        border: 1px solid #f0f0f0;
-      }
-
-      .auth-header {
-        text-align: center;
-        margin-bottom: 3rem !important;
-        padding-bottom: 2rem;
-        border-bottom: 2px solid #f8f9fa;
-      }
-
-      .auth-header h1 {
-        font-size: 2.5rem !important;
-        font-weight: 700 !important;
-        color: #000 !important;
-        margin-bottom: 0.5rem !important;
-        font-family: "Inter", sans-serif;
-      }
-
-      .auth-header p {
-        color: #666 !important;
-        font-size: 1.1rem !important;
-        margin: 0;
-        font-weight: 400;
-      }
-
-      /* Tab system styling */
-      .auth-tabs {
-        display: flex;
-        margin-bottom: 5rem !important;
-        background: #f8f9fa;
-        border-radius: 10px;
-        padding: 0.5rem;
-        border: 1px solid #e9ecef;
-      }
-
-      .auth-tab {
-        flex: 1;
-        padding: 0.8rem 1rem !important;
-        background: transparent;
-        border: none;
-        border-radius: 6px;
-        cursor: pointer;
-        font-size: 1.1rem !important;
-        font-weight: 600 !important;
-        color: #666;
-        transition: all 0.3s ease;
-        text-align: center;
-        height: 45px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 0 0.3rem !important;
-      }
-
-      .auth-tab.active {
-        background: #000 !important;
-        color: white !important;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-      }
-
-      .auth-tab:hover:not(.active) {
-        background: #fff;
-        color: #333;
-      }
-
-      /* Add more space below the tab buttons */
-      .auth-tabs {
-        margin-bottom: 2.5rem !important;
-      }
-
-      /* Enhanced form styling */
-      .form-group {
-        margin-bottom: 2rem !important;
-      }
-
-      .form-group label {
-        display: block;
-        margin-bottom: 0.8rem !important;
-        font-weight: 600 !important;
-        color: #333 !important;
-        font-size: 1rem;
-      }
-
-      .form-group input {
-        width: 100%;
-        padding: 1rem 1.2rem !important;
-        border: 2px solid #e9ecef !important;
-        border-radius: 8px !important;
-        font-size: 1rem !important;
-        transition: all 0.3s ease !important;
-        background: #fff;
-      }
-
-      .form-group input:focus {
-        outline: none !important;
-        border-color: #000 !important;
-        box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1) !important;
-        background: #fff;
-      }
-
-      .form-group input:hover:not(:focus) {
-        border-color: #ced4da;
-      }
-
-      /* Button styling */
-      .auth-btn {
-        width: 100%;
-        padding: 1rem !important;
-        background: #000 !important;
-        color: white !important;
-        border: none !important;
-        border-radius: 8px !important;
-        font-size: 1.1rem !important;
-        font-weight: 600 !important;
-        cursor: pointer;
-        transition: all 0.3s ease !important;
-        margin-top: 1rem;
-        height: 50px;
-      }
-
-      .auth-btn:hover {
-        background: #333 !important;
-        transform: translateY(-2px);
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-      }
-
-      .auth-btn:active {
-        transform: translateY(0);
-      }
-
-      /* Form container styling */
-      /* Form styling with more spacing */
-      .auth-form {
-        display: none;
-        animation: fadeIn 0.3s ease-in-out;
-        padding-top: 2rem !important;
-      }
-
-      .auth-form.active {
-        display: block;
-      }
-
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-          transform: translateY(10px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      /* Links styling */
-      .auth-link {
-        color: #000 !important;
-        text-decoration: none;
-        font-weight: 500;
-        transition: color 0.3s ease;
-      }
-
-      .auth-link:hover {
-        color: #333 !important;
-        text-decoration: underline;
-      }
-
-      /* Spacing adjustments */
-      .auth-form p {
-        margin: 2.5rem 0 !important;
-        color: #666;
-        text-align: center;
-        font-size: 0.95rem;
-      }
-
-      .auth-form {
-        margin-bottom: 3.5rem;
-        padding-bottom: 1.5rem;
-      }
-
-      #registerForm.auth-form {
-        margin-top: 4.5rem;
-      }
-
-      /* Stronger separation between login and register forms */
-      #loginForm.auth-form {
-        margin-bottom: 4.5rem;
-      }
-
-      /* Error/Success messages */
-      .message {
-        padding: 1rem;
-        border-radius: 8px;
-        margin-bottom: 1.5rem;
-        font-weight: 500;
-      }
-
-      .message.error {
-        background: #f8d7da;
-        color: #721c24;
-        border: 1px solid #f5c6cb;
-      }
-
-      .message.success {
-        background: #d4edda;
-        color: #155724;
-        border: 1px solid #c3e6cb;
-      }
-
-      /* Notification styling for login/register messages */
-      .notification {
-        padding: 1rem;
-        border-radius: 8px;
-        margin-bottom: 1.5rem;
-        font-weight: 500;
-      }
-
-      .notification.error {
-        background: #f8d7da;
-        color: #721c24;
-        border: 1px solid #f5c6cb;
-      }
-
-      .notification.success {
-        background: #d4edda;
-        color: #155724;
-        border: 1px solid #c3e6cb;
-      }
-
-      .notification.info {
-        background: #d1ecf1;
-        color: #0c5460;
-        border: 1px solid #bee5eb;
-      }
-
-      #loginMessage,
-      #registerMessage {
-        margin-bottom: 1.5rem;
-      }
-
-      /* Mobile responsiveness */
-      @media (max-width: 768px) {
-        .auth-container {
-          margin: 1rem !important;
-          padding: 2rem !important;
-        }
-
-        .auth-header h1 {
-          font-size: 2rem !important;
-        }
-
-        .auth-tab {
-          font-size: 1rem !important;
-          padding: 0.7rem !important;
-        }
-      }
-    </style>
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/login.css" />
   </head>
   <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -318,24 +59,6 @@
           <p>Access your account or create a new one</p>
         </div>
 
-        <!-- Tabs -->
-        <div class="auth-tabs">
-          <button
-            class="auth-tab active"
-            data-tab="login"
-            onclick="switchTab('login')"
-          >
-            Sign In
-          </button>
-          <button
-            class="auth-tab"
-            data-tab="register"
-            onclick="switchTab('register')"
-          >
-            Create Account
-          </button>
-        </div>
-
         <!-- Login Form -->
         <div id="loginForm" class="auth-form active">
           <div id="loginMessage"></div>
@@ -353,15 +76,19 @@
                 required
               />
             </div>
-            <button type="submit" class="auth-btn">Sign In</button>
-          </form>
 
-          <p>
-            Don't have an account?
-            <a href="#" class="auth-link" onclick="switchTab('register')"
-              >Create one here</a
-            >
-          </p>
+            <!-- Button row with both Login and Create Account -->
+            <div class="button-row">
+              <button type="submit" class="auth-btn">Sign In</button>
+              <button
+                type="button"
+                class="auth-btn auth-btn-secondary"
+                data-tab="register"
+              >
+                Create Account
+              </button>
+            </div>
+          </form>
         </div>
 
         <!-- Register Form -->
@@ -377,7 +104,7 @@
                 required
                 placeholder="e.g. john_doe (no spaces)"
               />
-              <small style="color: #666; font-size: 0.8rem"
+              <small class="form-hint"
                 >Use letters, numbers, and underscores only</small
               >
             </div>
@@ -390,9 +117,7 @@
                 required
                 placeholder="yourname@stud.noroff.no"
               />
-              <small style="color: #666; font-size: 0.8rem"
-                >Must end with @stud.noroff.no</small
-              >
+              <small class="form-hint">Must end with @stud.noroff.no</small>
             </div>
             <div class="form-group">
               <label for="registerPassword">Password</label>
@@ -403,9 +128,7 @@
                 required
                 placeholder="Minimum 8 characters"
               />
-              <small style="color: #666; font-size: 0.8rem"
-                >At least 8 characters recommended</small
-              >
+              <small class="form-hint">At least 8 characters recommended</small>
             </div>
             <div class="form-group">
               <label for="confirmPassword">Confirm Password</label>
@@ -416,15 +139,19 @@
                 required
               />
             </div>
-            <button type="submit" class="auth-btn">Create Account</button>
-          </form>
 
-          <p>
-            Already have an account?
-            <a href="#" class="auth-link" onclick="switchTab('login')"
-              >Sign in here</a
-            >
-          </p>
+            <!-- Button row with both Create Account and Login -->
+            <div class="button-row">
+              <button type="submit" class="auth-btn">Create Account</button>
+              <button
+                type="button"
+                class="auth-btn auth-btn-secondary"
+                data-tab="login"
+              >
+                Sign In
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </main>
@@ -441,7 +168,6 @@
     </footer>
 
     <script src="js/api.js"></script>
-    <script src="js/modules.js"></script>
     <script src="js/login-register.js"></script>
   </body>
 </html>

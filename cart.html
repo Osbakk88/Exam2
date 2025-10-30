@@ -5,15 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Your shopping cart" />
     <title>Shopping Cart - Online Shop</title>
-    <!-- NOTE: AI assistance used for cart-to-login integration and checkout flow -->
-    <!-- Google Fonts -->
+
+    <!-- ATTRIBUTION: Cart design based on Designmodo tutorial -->
+    <!-- Original source: https://designmodo.com/shopping-cart-ui/ -->
+    <!-- Author: Raul Dronca - Designmodo -->
+    <!-- Adapted and modified for this e-commerce project -->
+
+    <!-- Google Fonts - Match other pages -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/cart.css" />
   </head>
   <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -46,23 +53,44 @@
       </div>
     </header>
 
-    <main class="container cart-container" id="main-content">
-      <h2>Shopping Cart</h2>
+    <main id="main-content">
+      <!-- Shopping Cart Container - Based on Designmodo design -->
+      <div class="shopping-cart">
+        <div class="title">Shopping Bag</div>
 
-      <div id="cartItems">
-        <!-- Cart items will be loaded here by JavaScript -->
-      </div>
-
-      <div id="cartSummary" class="cart-summary hidden">
-        <div class="cart-total">Total: <span id="cartTotal">kr 0</span></div>
-
-        <!-- Checkout section - will be updated based on login status -->
-        <div id="checkoutArea">
-          <!-- Content will be populated by JavaScript -->
+        <!-- Cart items will be dynamically loaded here -->
+        <div id="cartItems">
+          <!-- Items will be populated by JavaScript -->
         </div>
 
-        <div class="flex-gap-mt">
-          <button id="clearCartBtn" class="btn btn-danger">Clear Cart</button>
+        <!-- Empty cart state -->
+        <div id="emptyCart" class="empty-cart-state hidden">
+          <div class="item">
+            <div class="empty-message">
+              <h3>Your cart is empty</h3>
+              <p>Browse our products and add items to your cart.</p>
+              <a href="shop.html" class="btn btn-primary">Continue Shopping</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cart summary and checkout -->
+        <div id="cartSummary" class="cart-summary-section hidden">
+          <div class="item checkout-section">
+            <div class="checkout-content">
+              <div class="total-section">
+                <span class="total-label">Total: </span>
+                <span id="cartTotal" class="total-amount">kr 0</span>
+              </div>
+            </div>
+
+            <div id="checkoutArea" class="checkout-actions">
+              <!-- Will be populated by JavaScript based on login status -->
+              <a href="#" id="clearCartBtn" class="btn btn-primary">
+                Clear Cart
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </main>
@@ -73,6 +101,7 @@
       </div>
     </footer>
 
+    <!-- Pure vanilla JavaScript - no frameworks -->
     <script src="js/api.js"></script>
     <script src="js/cart.js"></script>
   </body>

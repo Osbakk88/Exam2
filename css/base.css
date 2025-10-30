@@ -1,0 +1,180 @@
+/* Base CSS - Global styles, reset, typography, and core layout */
+/* NOTE: AI assistance used extensively for CSS cleanup and professional design improvements */
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap");
+
+/* ===== CSS RESET ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ===== GLOBAL BODY STYLES ===== */
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, sans-serif;
+  line-height: 1.7;
+  color: #000000;
+  background: #faf7f0;
+  background-attachment: fixed;
+  min-height: 100vh;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===== MODERN TYPOGRAPHY ===== */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Poppins", "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 600;
+  line-height: 1.2;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+}
+
+h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+h4 {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+h5 {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+h6 {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+/* Monospace font for code elements */
+code,
+pre,
+.code,
+.monospace {
+  font-family: "JetBrains Mono", Consolas, Monaco, monospace;
+}
+
+/* ===== UTILITY CLASSES ===== */
+.hidden {
+  display: none !important;
+}
+
+.form-hint {
+  color: #666;
+  font-size: 0.8rem;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* ===== MAIN CONTENT AREAS ===== */
+main {
+  padding: 0 0 2rem 0;
+}
+
+.content-section {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 24px;
+  padding: 2.5rem;
+  margin: 2rem 0;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.text-center {
+  text-align: center;
+}
+
+.margin-top {
+  margin-top: 1rem;
+}
+
+.no-decoration {
+  text-decoration: none;
+}
+
+/* ===== ACCESSIBILITY ===== */
+:focus {
+  outline: 2px solid #007bff;
+  outline-offset: 2px;
+}
+
+/* Ensure proper contrast for accessibility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ===== RESPONSIVE HELPERS ===== */
+@media (max-width: 1024px) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.75rem;
+  }
+
+  .container {
+    padding: 0 0.75rem;
+  }
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 1.75rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  .container {
+    padding: 0 0.5rem;
+  }
+}
+
+/* ===== ACCESSIBILITY - REDUCED MOTION ===== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

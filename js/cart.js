@@ -1,6 +1,12 @@
-// Cart page functionality
-// NOTE: AI assistance used for login redirect flow and checkout integration
+// Cart page functionality - Designmodo Integration
+// ATTRIBUTION: Cart design based on Designmodo tutorial
+// Original source: https://designmodo.com/shopping-cart-ui/
+// Author: Raul Dronca - Designmodo
+// Adapted and modified for this e-commerce project with API integration
+
 document.addEventListener("DOMContentLoaded", function () {
+  console.log("🛒 Designmodo Cart page loaded");
+
   // Update navigation based on login status
   updateNavigation();
 
@@ -32,65 +38,60 @@ function displayCart() {
   const cartItems = API.Cart.getCart();
   const cartItemsContainer = document.getElementById("cartItems");
   const cartSummary = document.getElementById("cartSummary");
+  const emptyCart = document.getElementById("emptyCart");
+
+  console.log("📦 Cart items:", cartItems);
 
   if (cartItems.length === 0) {
-    showEmptyCart(cartItemsContainer);
-    cartSummary.classList.add("hidden");
-    updateCheckoutArea(); // Still need to show login requirement even with empty cart
+    showEmptyCart();
     return;
   }
 
-  populateCartItems(cartItemsContainer, cartItems);
-  updateCartSummary();
-  updateCheckoutArea();
-  cartSummary.classList.remove("hidden");
-}
+  // Hide empty state and show cart items
+  emptyCart.style.display = "none";
+  cartSummary.style.display = "block";
 
-function showEmptyCart(container) {
-  // Clear container
-  container.innerHTML = "";
-
-  // Create elements
-  const emptyDiv = document.createElement("div");
-  emptyDiv.className = "empty-state";
-
-  const heading = document.createElement("h3");
-  heading.textContent = "Your cart is empty";
-
-  const paragraph = document.createElement("p");
-  paragraph.textContent = "Browse our products and add items to your cart.";
-
-  const link = document.createElement("a");
-  link.href = "shop.html";
-  link.className = "btn btn-primary";
-  link.textContent = "Continue Shopping";
-
-  // Append elements
-  emptyDiv.appendChild(heading);
-  emptyDiv.appendChild(paragraph);
-  emptyDiv.appendChild(link);
-  container.appendChild(emptyDiv);
-}
-
-function populateCartItems(container, cartItems) {
-  // Clear container
-  container.innerHTML = "";
+  // Clear container and populate with Designmodo-style items
+  cartItemsContainer.innerHTML = "";
 
   cartItems.forEach((item) => {
-    const cartItemElement = createCartItemElement(item);
-    container.appendChild(cartItemElement);
+    const cartItemElement = createDesignmodoCartItem(item);
+    cartItemsContainer.appendChild(cartItemElement);
   });
+
+  updateCartSummary();
+  updateCheckoutArea();
 }
 
-function createCartItemElement(item) {
-  // Create main cart item div
-  const cartItem = document.createElement("div");
-  cartItem.className = "cart-item";
-  cartItem.setAttribute("data-item-id", item.id);
+function showEmptyCart() {
+  const cartSummary = document.getElementById("cartSummary");
+  const emptyCart = document.getElementById("emptyCart");
 
-  // Create image section
+  cartSummary.style.display = "none";
+  emptyCart.style.display = "block";
+}
+
+function createDesignmodoCartItem(item) {
+  // Create main item div following Designmodo structure
+  const itemDiv = document.createElement("div");
+  itemDiv.className = "item";
+  itemDiv.setAttribute("data-item-id", item.id);
+
+  // Action buttons (delete, favorite)
+  const buttonsDiv = document.createElement("div");
+  buttonsDiv.className = "buttons";
+
+  const deleteBtn = document.createElement("div");
+  deleteBtn.className = "delete-btn";
+  deleteBtn.textContent = "×"; // Simple X character
+  deleteBtn.title = "Remove item"; // Accessibility tooltip
+  deleteBtn.addEventListener("click", () => removeFromCart(item.id));
+
+  buttonsDiv.appendChild(deleteBtn);
+
+  // Product image
   const imageDiv = document.createElement("div");
-  imageDiv.className = "cart-item-image";
+  imageDiv.className = "image";
 
   const img = document.createElement("img");
   // Handle different image data structures from the API
@@ -102,85 +103,100 @@ function createCartItemElement(item) {
     img.alt = item.title;
   } else {
     // Fallback to a generic placeholder
-    img.src = "https://via.placeholder.com/150x150?text=No+Image";
+    img.src = "https://via.placeholder.com/60x60?text=No+Image";
     img.alt = item.title;
   }
 
   img.onerror = function () {
-    this.src = "https://via.placeholder.com/150x150?text=No+Image";
+    this.src = "https://via.placeholder.com/60x60?text=No+Image";
   };
 
   imageDiv.appendChild(img);
 
-  // Create info section
-  const infoDiv = document.createElement("div");
-  infoDiv.className = "cart-item-info";
+  // Product description
+  const descriptionDiv = document.createElement("div");
+  descriptionDiv.className = "description";
 
-  const title = document.createElement("h3");
-  title.className = "cart-item-title";
-  title.textContent = item.title;
+  const titleSpan = document.createElement("span");
+  titleSpan.textContent = item.title;
 
-  const price = document.createElement("div");
-  price.className = "cart-item-price";
-
+  const priceSpan = document.createElement("span");
   // Handle price safely - check for discounted price first
   let displayPrice = item.discountedPrice || item.price;
-
-  // Ensure price is a number
   if (displayPrice && !isNaN(displayPrice)) {
-    price.textContent = API.UI.formatPrice(displayPrice);
+    priceSpan.textContent = API.UI.formatPrice(displayPrice);
   } else {
     console.warn("Invalid price for item:", item);
-    price.textContent = "Price not available";
+    priceSpan.textContent = "Price not available";
   }
 
-  infoDiv.appendChild(title);
-  infoDiv.appendChild(price);
-
-  // Create controls section
-  const controlsDiv = document.createElement("div");
-  controlsDiv.className = "cart-item-controls";
+  descriptionDiv.appendChild(titleSpan);
+  descriptionDiv.appendChild(priceSpan);
 
   // Quantity controls
   const quantityDiv = document.createElement("div");
-  quantityDiv.className = "quantity-controls";
+  quantityDiv.className = "quantity";
 
-  const decreaseBtn = document.createElement("button");
-  decreaseBtn.className = "quantity-btn decrease-qty";
-  decreaseBtn.setAttribute("data-item-id", item.id);
-  decreaseBtn.textContent = "-";
+  const minusBtn = document.createElement("button");
+  minusBtn.className = "minus-btn";
+  minusBtn.textContent = "-";
+  minusBtn.addEventListener("click", () =>
+    updateQuantity(item.id, item.quantity - 1)
+  );
 
   const quantityInput = document.createElement("input");
   quantityInput.type = "number";
-  quantityInput.className = "quantity-input";
   quantityInput.value = item.quantity;
   quantityInput.min = "1";
-  quantityInput.setAttribute("data-item-id", item.id);
+  quantityInput.addEventListener("change", (e) => {
+    const newQuantity = parseInt(e.target.value);
+    if (newQuantity > 0) {
+      updateQuantity(item.id, newQuantity);
+    }
+  });
 
-  const increaseBtn = document.createElement("button");
-  increaseBtn.className = "quantity-btn increase-qty";
-  increaseBtn.setAttribute("data-item-id", item.id);
-  increaseBtn.textContent = "+";
+  const plusBtn = document.createElement("button");
+  plusBtn.className = "plus-btn";
+  plusBtn.textContent = "+";
+  plusBtn.addEventListener("click", () =>
+    updateQuantity(item.id, item.quantity + 1)
+  );
 
-  quantityDiv.appendChild(decreaseBtn);
+  quantityDiv.appendChild(minusBtn);
   quantityDiv.appendChild(quantityInput);
-  quantityDiv.appendChild(increaseBtn);
+  quantityDiv.appendChild(plusBtn);
 
-  // Remove button
-  const removeBtn = document.createElement("button");
-  removeBtn.className = "btn btn-danger remove-item";
-  removeBtn.setAttribute("data-item-id", item.id);
-  removeBtn.textContent = "Remove";
+  // Total price
+  const totalPriceDiv = document.createElement("div");
+  totalPriceDiv.className = "total-price";
+  const itemTotal = displayPrice * item.quantity;
+  totalPriceDiv.textContent = API.UI.formatPrice(itemTotal);
 
-  controlsDiv.appendChild(quantityDiv);
-  controlsDiv.appendChild(removeBtn);
+  // Assemble the item
+  itemDiv.appendChild(buttonsDiv);
+  itemDiv.appendChild(imageDiv);
+  itemDiv.appendChild(descriptionDiv);
+  itemDiv.appendChild(quantityDiv);
+  itemDiv.appendChild(totalPriceDiv);
 
-  // Assemble cart item
-  cartItem.appendChild(imageDiv);
-  cartItem.appendChild(infoDiv);
-  cartItem.appendChild(controlsDiv);
+  return itemDiv;
+}
 
-  return cartItem;
+function updateQuantity(productId, newQuantity) {
+  if (newQuantity <= 0) {
+    removeFromCart(productId);
+    return;
+  }
+
+  API.Cart.updateQuantity(productId, newQuantity);
+  displayCart(); // Refresh the display
+  showNotification("Quantity updated", "success");
+}
+
+function removeFromCart(productId) {
+  API.Cart.removeItem(productId);
+  displayCart(); // Refresh the display
+  showNotification("Item removed from cart", "success");
 }
 
 function updateCartSummary() {
@@ -191,177 +207,104 @@ function updateCartSummary() {
 
 function updateCheckoutArea() {
   const checkoutArea = document.getElementById("checkoutArea");
-
-  if (!checkoutArea) {
-    console.error("Checkout area element not found");
-    return;
-  }
+  const clearCartBtn = document.getElementById("clearCartBtn");
 
   if (API.Auth.isLoggedIn()) {
-    // User is logged in - show normal checkout button
+    // User is logged in, show checkout button next to clear cart
     checkoutArea.innerHTML = `
-      <div class="checkout-ready">
-        <p class="checkout-status">Ready to checkout</p>
-        <button id="checkoutBtn" class="btn btn-primary btn-full-width btn-large">
-          Proceed to Checkout
-        </button>
-      </div>
+      <a href="checkout.html" class="btn btn-primary">Proceed to Checkout</a>
     `;
+    // Re-append the clear cart button to maintain it in the same container
+    checkoutArea.appendChild(clearCartBtn);
   } else {
-    // User not logged in - show login requirement
+    // User not logged in, show login requirement and clear cart button
     checkoutArea.innerHTML = `
-      <div class="login-required">
-        <div class="login-requirement-box">
-          <h4>Login Required to Purchase</h4>
-          <p>You must log in to complete your purchase.</p>
-          <button id="loginForCheckoutBtn" class="btn btn-primary btn-full-width">
-            Login to Checkout
-          </button>
-        </div>
+      <div class="login-prompt">
+        <p>Please <a href="login.html">login</a> to proceed with checkout</p>
       </div>
     `;
-  }
-
-  // Re-attach event listeners after updating HTML
-  attachCheckoutEventListeners();
-}
-
-function attachCheckoutEventListeners() {
-  // Remove old listeners to avoid duplicates
-  const checkoutBtn = document.getElementById("checkoutBtn");
-  const loginBtn = document.getElementById("loginForCheckoutBtn");
-
-  if (checkoutBtn) {
-    checkoutBtn.addEventListener("click", function () {
-      // User is logged in, proceed to checkout
-      window.location.href = "checkout.html";
-    });
-  }
-
-  if (loginBtn) {
-    loginBtn.addEventListener("click", function () {
-      // Store checkout intent and redirect to login
-      localStorage.setItem("pendingCheckout", "true");
-      localStorage.setItem("returnUrl", "cart.html");
-      window.location.href = "login.html";
-    });
+    // Re-append the clear cart button
+    checkoutArea.appendChild(clearCartBtn);
   }
 }
 
 function setupEventListeners() {
-  // Handle logout button with better error handling
-  document.addEventListener("click", function (e) {
-    console.log(
-      "Click detected on:",
-      e.target,
-      "data-action:",
-      e.target.getAttribute("data-action")
-    );
-
-    if (e.target.getAttribute("data-action") === "logout") {
-      e.preventDefault(); // Prevent any default behavior
-      console.log("Logout button clicked");
-
-      try {
-        if (
-          window.API &&
-          window.API.Auth &&
-          typeof window.API.Auth.logout === "function"
-        ) {
-          window.API.Auth.logout();
-        } else {
-          console.error("API.Auth.logout not available");
-          // Fallback manual logout
-          localStorage.clear();
-          window.location.reload();
-        }
-      } catch (error) {
-        console.error("Error during logout:", error);
-        // Fallback manual logout
-        localStorage.clear();
-        window.location.reload();
-      }
-      return;
-    }
-  });
-
-  // Handle quantity input changes
-  document.addEventListener("input", function (e) {
-    if (e.target.classList.contains("quantity-input")) {
-      const itemId = e.target.getAttribute("data-item-id");
-      const newQuantity = parseInt(e.target.value);
-      if (newQuantity > 0) {
-        API.Cart.updateQuantity(itemId, newQuantity);
-        updateCartSummary();
-      }
-    }
-  });
-
-  // Handle quantity changes and item removal
-  document.addEventListener("click", function (e) {
-    const itemId = e.target.getAttribute("data-item-id");
-    if (e.target.classList.contains("increase-qty")) {
-      const currentQty = parseInt(
-        document.querySelector(`input[data-item-id="${itemId}"]`).value
-      );
-      API.Cart.updateQuantity(itemId, currentQty + 1);
-      displayCart();
-    }
-
-    if (e.target.classList.contains("decrease-qty")) {
-      const currentQty = parseInt(
-        document.querySelector(`input[data-item-id="${itemId}"]`).value
-      );
-      if (currentQty > 1) {
-        API.Cart.updateQuantity(itemId, currentQty - 1);
-        displayCart();
-      }
-    }
-
-    if (e.target.classList.contains("remove-item")) {
-      API.Cart.removeItem(itemId);
-      displayCart();
-      showNotification("Item removed from cart");
-    }
-  });
-
-  // Handle quantity input changes
-  document.addEventListener("change", function (e) {
-    if (e.target.classList.contains("quantity-input")) {
-      const itemId = e.target.getAttribute("data-item-id");
-      const newQuantity = parseInt(e.target.value);
-      if (newQuantity > 0) {
-        API.Cart.updateQuantity(itemId, newQuantity);
-        updateCartSummary();
-      }
-    }
-  });
-
   // Clear cart button
-  document
-    .getElementById("clearCartBtn")
-    .addEventListener("click", function () {
-      if (confirm("Are you sure you want to clear your entire cart?")) {
+  const clearCartBtn = document.getElementById("clearCartBtn");
+  if (clearCartBtn) {
+    clearCartBtn.addEventListener("click", function (e) {
+      e.preventDefault(); // Prevent default anchor behavior
+      if (confirm("Are you sure you want to clear your cart?")) {
         API.Cart.clearCart();
         displayCart();
-        showNotification("Cart cleared");
+        showNotification("Cart cleared", "success");
       }
     });
+  }
 
-  // Listen for cart updates from other pages
-  window.addEventListener("cartUpdated", function () {
-    displayCart();
+  // Logout functionality
+  document.addEventListener("click", function (e) {
+    if (e.target.dataset.action === "logout") {
+      API.Auth.logout();
+      showNotification("Logged out successfully", "success");
+      updateNavigation();
+      updateCheckoutArea();
+    }
   });
 }
 
 function showNotification(message, type = "success") {
+  // Create notification element
   const notification = document.createElement("div");
   notification.className = `notification ${type}`;
   notification.textContent = message;
 
+  // Add to page
   document.body.appendChild(notification);
 
+  // Remove after 3 seconds
   setTimeout(() => {
-    notification.remove();
+    if (notification.parentNode) {
+      notification.parentNode.removeChild(notification);
+    }
   }, 3000);
 }
+
+// Designmodo-style functionality with vanilla JavaScript
+document.addEventListener("DOMContentLoaded", function () {
+  // Minus button functionality
+  document.addEventListener("click", function (e) {
+    if (e.target.classList.contains("minus-btn")) {
+      e.preventDefault();
+      const button = e.target;
+      const input = button.closest("div").querySelector("input");
+      let value = parseInt(input.value);
+
+      if (value > 1) {
+        value = value - 1;
+      } else {
+        value = 0;
+      }
+
+      input.value = value;
+    }
+  });
+
+  // Plus button functionality
+  document.addEventListener("click", function (e) {
+    if (e.target.classList.contains("plus-btn")) {
+      e.preventDefault();
+      const button = e.target;
+      const input = button.closest("div").querySelector("input");
+      let value = parseInt(input.value);
+
+      if (value < 100) {
+        value = value + 1;
+      } else {
+        value = 100;
+      }
+
+      input.value = value;
+    }
+  });
+});

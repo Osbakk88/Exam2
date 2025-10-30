@@ -11,7 +11,9 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/product.css" />
   </head>
   <body>
     <header>
@@ -43,13 +45,83 @@
       </div>
     </header>
 
-    <main class="container">
-      <div class="breadcrumb">
-        <a href="shop.html">← Back to Shop</a>
-      </div>
+    <main class="product-detail-main">
+      <div class="product-detail-container">
+        <div class="product-detail-card">
+          <div class="product-image-section">
+            <div class="product-image-frame">
+              <div class="image-container">
+                <img
+                  id="productImage"
+                  src="/api/placeholder/400/400"
+                  alt="Product Image"
+                />
+              </div>
+              <div class="product-price">
+                <span id="productPrice">kr 899.99</span>
+              </div>
+            </div>
+          </div>
 
-      <div id="productContainer">
-        <!-- Product details will be loaded here -->
+          <div class="product-info-section">
+            <div class="product-header">
+              <h1 id="productTitle">Pink shoes</h1>
+              <button class="share-btn">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92S19.61 16.08 18 16.08z"
+                  />
+                </svg>
+                Share
+              </button>
+            </div>
+
+            <div class="product-rating">
+              <div class="stars" id="productStars">
+                <span class="star">☆</span>
+                <span class="star">☆</span>
+                <span class="star">☆</span>
+                <span class="star">☆</span>
+                <span class="star">☆</span>
+              </div>
+              <span class="rating-text" id="ratingText">(0/5)</span>
+            </div>
+
+            <div class="product-description">
+              <p id="productDescription">
+                Gold-trimmed pink shoes perfect for any women with a sense of
+                adventure.
+              </p>
+            </div>
+
+            <div class="product-category">
+              <span id="productCategory">Shoes</span>
+            </div>
+
+            <div class="quantity-section">
+              <label for="quantity">Quantity:</label>
+              <div class="quantity-controls">
+                <button class="quantity-btn" id="decreaseBtn">-</button>
+                <input type="number" id="quantity" value="1" min="1" readonly />
+                <button class="quantity-btn" id="increaseBtn">+</button>
+              </div>
+            </div>
+
+            <div class="product-actions">
+              <button id="loginToPurchaseBtn" class="action-btn primary-btn">
+                Login to purchase
+              </button>
+              <button id="clearCartBtn" class="action-btn secondary-btn">
+                Clear Cart
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </main>
 
