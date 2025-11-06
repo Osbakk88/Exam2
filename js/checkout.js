@@ -19,6 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
   setupPaymentMethods();
   setupPaymentSelection();
   setupFormValidation();
+
   setupPlaceOrder();
 
   // Setup logout functionality
