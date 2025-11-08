@@ -670,18 +670,22 @@ function setupTouchControls() {
   const fastSwipeDistance = 20;
 
   // Touch events with enhanced responsiveness
-  carouselTrack.addEventListener("touchstart", (e) => {
-    startX = e.touches[0].clientX;
-    startY = e.touches[0].clientY;
-    currentX = startX;
-    startTime = Date.now();
-    isDragging = true;
-    pauseAutoplay();
-    
-    // Add visual feedback
-    carouselTrack.style.cursor = 'grabbing';
-    carouselTrack.style.transition = 'none';
-  }, { passive: true });
+  carouselTrack.addEventListener(
+    "touchstart",
+    (e) => {
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+      currentX = startX;
+      startTime = Date.now();
+      isDragging = true;
+      pauseAutoplay();
+
+      // Add visual feedback
+      carouselTrack.style.cursor = "grabbing";
+      carouselTrack.style.transition = "none";
+    },
+    { passive: true }
+  );
 
   carouselTrack.addEventListener("touchmove", (e) => {
     if (!isDragging) return;
@@ -694,11 +698,11 @@ function setupTouchControls() {
     // More liberal horizontal swipe detection
     if (deltaX > 10 && deltaX > deltaY * 0.3) {
       e.preventDefault(); // Prevent vertical scrolling
-      
+
       // Add subtle visual feedback during swipe
       const movePercent = ((currentX - startX) / window.innerWidth) * 100;
       const clampedMove = Math.max(-30, Math.min(30, movePercent));
-      
+
       // Slight transform feedback (optional)
       if (Math.abs(clampedMove) > 5) {
         carouselTrack.style.transform = `translateX(${clampedMove}px)`;
@@ -716,22 +720,25 @@ function setupTouchControls() {
     const deltaTime = endTime - startTime;
 
     isDragging = false;
-    
+
     // Reset visual feedback
-    carouselTrack.style.cursor = 'grab';
-    carouselTrack.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-    carouselTrack.style.transform = 'translateX(0)';
-    carouselTrack.style.opacity = '1';
+    carouselTrack.style.cursor = "grab";
+    carouselTrack.style.transition = "opacity 0.3s ease, transform 0.3s ease";
+    carouselTrack.style.transform = "translateX(0)";
+    carouselTrack.style.opacity = "1";
 
     // Enhanced swipe detection with different thresholds
     let shouldSwipe = false;
-    
+
     // Fast swipe detection (quick flicks)
     if (deltaTime <= fastSwipeTime && Math.abs(deltaX) >= fastSwipeDistance) {
       shouldSwipe = true;
     }
     // Normal swipe detection
-    else if (Math.abs(deltaX) >= minSwipeDistance && deltaTime <= maxSwipeTime) {
+    else if (
+      Math.abs(deltaX) >= minSwipeDistance &&
+      deltaTime <= maxSwipeTime
+    ) {
       shouldSwipe = true;
     }
     // Velocity-based detection for slower but long swipes
@@ -744,7 +751,7 @@ function setupTouchControls() {
       if (navigator.vibrate) {
         navigator.vibrate(50);
       }
-      
+
       if (deltaX > 0) {
         prevSlide(); // Swipe right - go to previous
       } else {
@@ -830,5 +837,3 @@ function resumeAutoplay() {
     }, 5000);
   }
 }
-
-
