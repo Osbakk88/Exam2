@@ -12,17 +12,7 @@
     const userData = {
       name: name,
       email: email,
-      password: password,
-      bio: "This is my NightNode bio",
-      avatar: {
-        url: "https://i.postimg.cc/L6m0d8vW/Night-Node-6.webp",
-        alt: "Placeholder NightNode avatar",
-      },
-      banner: {
-        url: "https://i.postimg.cc/26QyZws2/Night-Node-3.webp",
-        alt: "Placeholder NightNode banner",
-      },
-      venueManager: false,
+      password: password,     
     };
 
     try {

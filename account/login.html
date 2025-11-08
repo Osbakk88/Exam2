@@ -12,9 +12,13 @@
     <header>
       <div class="container">
         <div class="logo">
-          <h1>
-            <a href="../index.html" class="no-decoration">Online Shop</a>
-          </h1>
+          <a href="../index.html" class="logo-link">
+            <img
+              src="../images/FullLogo_Transparent_NoBuffer (5).png"
+              alt="Modehub Online Shop"
+              class="logo-image"
+            />
+          </a>
         </div>
         <nav>
           <ul>
@@ -34,7 +38,8 @@
 
     <main class="container">
       <div class="auth-container">
-        <h2>Login</h2>
+        <h2 class="auth-title">Welcome</h2>
+        <p class="auth-subtitle">Login or create a new account</p>
         <form id="loginFormElement">
           <div class="form-group">
             <label for="loginEmail">Email Address:</label>
@@ -62,9 +67,7 @@
             <small class="input-hint">Minimum 8 characters</small>
           </div>
 
-          <button type="submit" class="btn btn-primary btn-full-width">
-            Login
-          </button>
+          <button type="submit" class="auth-btn">Login</button>
         </form>
 
         <div id="loginMessage"></div>

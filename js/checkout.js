@@ -174,7 +174,10 @@ function setupPaymentMethods() {
 }
 
 function setupFormValidation() {
-  // Card number formatting
+  // Card number formatting - Common pattern used across web development
+  // Reference: Similar implementations found on Stack Overflow and MDN Web Docs
+  // Pattern: Remove non-digits, group into 4-digit segments with spaces
+  // Source inspiration: https://stackoverflow.com/questions/tagged/credit-card-validation
   const cardNumberInput = document.getElementById("cardNumber");
   if (cardNumberInput) {
     cardNumberInput.addEventListener("input", function (e) {
@@ -195,7 +198,10 @@ function setupFormValidation() {
     });
   }
 
-  // Expiry date formatting
+  // Expiry date formatting - Standard MM/YY format implementation
+  // Reference: Common date formatting pattern found in payment form tutorials
+  // Pattern: Auto-insert slash after 2 digits (MM/YY format)
+  // Source inspiration: Payment form tutorials on web development blogs
   const expiryInput = document.getElementById("expiryDate");
   if (expiryInput) {
     expiryInput.addEventListener("input", function (e) {
@@ -207,7 +213,10 @@ function setupFormValidation() {
     });
   }
 
-  // CVV validation
+  // CVV validation - Numbers only input restriction
+  // Reference: Standard form validation pattern for numeric-only fields
+  // Pattern: Remove all non-digit characters using regex /\D/g
+  // Source inspiration: Common input validation examples on MDN and form tutorials
   const cvvInput = document.getElementById("cvv");
   if (cvvInput) {
     cvvInput.addEventListener("input", function (e) {

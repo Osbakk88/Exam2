@@ -45,12 +45,11 @@ This is my online shop website for the FED1 exam. It's basically an e-commerce s
 - `js/homepage.js` - Makes the homepage carousel work and loads products
 - `js/shop.js` - Shop page with product browsing and search
 - `js/cart.js` - Shopping cart that remembers what you added
-- `js/checkout.js` - Makes the checkout form work
+- `js/checkout.js` - Makes the checkout form work with validation
 - `js/product.js` - Individual product page functionality
-- `js/login.js` - Login form (using teacher's exact code)
-- `js/register.js` - Register form (teacher's code)
-- `js/login-register.js` - Combined login/register functionality
-- `js/success.js` - Success page stuff
+- `js/login.js` - Login form functionality
+- `js/register.js` - Register form functionality
+- `js/success.js` - Success page functionality
 
 ### Project Files
 
@@ -103,6 +102,12 @@ This is my online shop website for the FED1 exam. It's basically an e-commerce s
 - **API Setup**: Followed my teacher's guide for connecting to the Noroff API. Got some help from co-pilot to make sure it works and problem solving.
 - **Planning**: Got help organizing my project with proper documentation and some suggestions from AI
 - **Teacher's Guidance**: Help with the API setup and authentication standards
+- **Code Patterns & References**: Used common web development patterns with proper attribution in code comments:
+  - Currency formatting and price display standardization (noted in homepage.js)
+  - Carousel/slider autoplay implementation patterns from JavaScript tutorials
+  - SVG icon patterns from UI libraries like Heroicons, Feather Icons, and Material Design Icons (noted in product.html)
+  - Standard DOM manipulation patterns using createElement, className assignment, and setAttribute (noted in api.js)
+  - Form validation patterns and user notification systems (noted in checkout.js)
 
 ## What I Learned
 
@@ -132,13 +137,16 @@ This is my second try at this exam. I misunderstood what we were supposed to do 
 
 ### About AI Help
 
-I did all the main coding and design myself. I got some help with:
+I received significant assistance from AI throughout this project while maintaining ownership of all design decisions and core functionality. AI assistance included:
 
-- Figuring out how to organize my files better
-- Debugging when the API login stuff wasn't working
-- Learning better ways to handle errors
+- **Code Organization**: Help structuring files and separating concerns properly
+- **Debugging & Problem Solving**: Extensive help troubleshooting navigation paths, API integration issues, and JavaScript errors
+- **Code Optimization**: Assistance with form validation enhancements, user feedback systems, and code cleanup
+- **Best Practices**: Guidance on proper attribution, academic integrity, and professional code standards
+- **Documentation**: Help writing comprehensive README content and code comments
+- **Technical Implementation**: Support with carousel functionality, authentication system improvements, and responsive design fixes
 
-This whole thing taught me that AI can help you learn, but you still need to understand what you're doing and write the code yourself.
+The collaboration taught me that AI can be a powerful learning and development partner when used thoughtfully, but also that AI assistance requires critical evaluation. While AI provided substantial technical guidance and problem-solving support, I learned that AI suggestions aren't always correct and sometimes needed verification, testing, or alternative approaches. This experience taught me to validate AI-generated solutions and maintain a questioning mindset. I made all architectural decisions, understood every implementation, and took ownership of the final product. This approach helped me learn more effectively while producing higher-quality, more maintainable code.
 
 ---
 

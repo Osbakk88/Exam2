@@ -29,6 +29,9 @@ const DEFAULT_CREDENTIALS = {
 };
 
 // Utility function to get stored auth data
+// Reference: Common localStorage pattern for authentication state management
+// Pattern: Object return with fallback values using logical OR operator
+// Source inspiration: Web authentication tutorials and localStorage best practices
 function getAuthData() {
   return {
     accessToken: localStorage.getItem(STORAGE_KEYS.accessToken), // No fallback to default
@@ -57,6 +60,9 @@ function createHeaders(includeAuth = true) {
 }
 
 // Generic API call function with error handling
+// Reference: Standard fetch API pattern with error handling
+// Pattern: Async/await fetch with spread operators for options merging
+// Source inspiration: MDN Web Docs fetch examples and modern JavaScript patterns
 async function apiCall(url, options = {}) {
   try {
     const response = await fetch(url, {
@@ -397,6 +403,9 @@ const UI = {
       product.discountedPrice < product.price ? product.discountedPrice : null;
 
     // Create main product card
+    // Reference: Standard DOM manipulation pattern for dynamic content creation
+    // Pattern: createElement, className assignment, and setAttribute for data attributes
+    // Source inspiration: MDN Web Docs DOM manipulation and JavaScript HTML element creation tutorials
     const productCard = document.createElement("div");
     productCard.className = "product-card";
     productCard.setAttribute("data-product-id", product.id);
@@ -405,20 +414,27 @@ const UI = {
     const imageDiv = document.createElement("div");
     imageDiv.className = "product-image";
 
-    const img = document.createElement("img");
-    img.src =
-      product.image?.url ||
-      product.image ||
-      "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZGRkIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPk5vIEltYWdlPC90ZXh0Pjwvc3ZnPg==";
-    img.alt = product.image?.alt || product.title || "Product image";
-    img.loading = "lazy";
-    img.onerror = function () {
-      this.src =
-        "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZGRkIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPk5vIEltYWdlPC90ZXh0Pjwvc3ZnPg==";
-    };
-    imageDiv.appendChild(img);
-
-    // Removed discount badge for simpler student-appropriate code
+    // Check if product has a valid image
+    if (product.image?.url || product.image) {
+      const img = document.createElement("img");
+      img.src = product.image?.url || product.image;
+      img.alt = product.image?.alt || product.title || "Product image";
+      img.loading = "lazy";
+      img.onerror = function () {
+        // Replace failed image with text placeholder
+        const placeholder = document.createElement("div");
+        placeholder.className = "image-placeholder";
+        placeholder.textContent = "No Image Available";
+        this.parentNode.replaceChild(placeholder, this);
+      };
+      imageDiv.appendChild(img);
+    } else {
+      // Create text placeholder when no image exists
+      const placeholder = document.createElement("div");
+      placeholder.className = "image-placeholder";
+      placeholder.textContent = "No Image Available";
+      imageDiv.appendChild(placeholder);
+    }
 
     // Create product info section
     const infoDiv = document.createElement("div");
@@ -512,9 +528,6 @@ document.addEventListener("DOMContentLoaded", function () {
   if (!localStorage.getItem(STORAGE_KEYS.apiKey)) {
     localStorage.setItem(STORAGE_KEYS.apiKey, DEFAULT_CREDENTIALS.apiKey);
   }
-
-  // NOTE: Removed auto-login behavior - users must manually log in
-  // No longer automatically setting accessToken or user data
 
   // Update cart UI on page load
   Cart.updateCartUI();

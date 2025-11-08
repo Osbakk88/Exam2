@@ -247,13 +247,18 @@ function renderCarousel() {
       index === 0 ? "active" : ""
     }" data-index="${index}">
       <div class="slide-image">
-        <img src="${
-          product.image?.url ||
-          product.image ||
-          "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZGRkIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIyNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPk5vIEltYWdlPC90ZXh0Pjwvc3ZnPg=="
-        }" 
-             alt="${product.title}" 
-             onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZGRkIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIyNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPk5vIEltYWdlPC90ZXh0Pjwvc3ZnPg=='">
+        ${
+          product.image?.url || product.image
+            ? `<img src="${product.image?.url || product.image}" alt="${
+                product.title
+              }" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">`
+            : ""
+        }
+        <div class="carousel-image-placeholder" style="${
+          product.image?.url || product.image ? "display:none" : "display:flex"
+        }">
+          No Image Available
+        </div>
       </div>
       <div class="slide-content">
         <div class="slide-text">
@@ -302,10 +307,10 @@ function renderCarousel() {
   setupCarouselControls();
 }
 
-// Old setupCarouselControls function removed - using the new opacity-based version below
-// Old goToSlide function also removed - using the unified version below
-
 // Start carousel autoplay
+// Reference: Common carousel/slider autoplay implementation pattern
+// Pattern: setInterval for automatic slide progression with navigation function
+// Source inspiration: Carousel tutorials from web development blogs and JavaScript slider examples
 function startCarouselAutoplay() {
   carouselInterval = setInterval(() => {
     goToSlide(currentSlide + 1);
@@ -419,14 +424,13 @@ function renderProductFeed() {
     <div class="feed-product-card" style="animation-delay: ${index * 0.1}s">
       <a href="product.html?id=${product.id}" class="product-link">
         <div class="feed-product-image">
-          <img src="${
-            product.image?.url ||
-            product.image ||
-            "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZGRkIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPk5vIEltYWdlPC90ZXh0Pjwvc3ZnPg=="
-          }" 
-               alt="${product.title}"
-               onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZGRkIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPk5vIEltYWdlPC90ZXh0Pjwvc3ZnPg=='">
-          <!-- Removed discount badge for simpler student code -->
+          ${
+            product.image?.url || product.image
+              ? `<img src="${product.image?.url || product.image}" alt="${
+                  product.title
+                }">`
+              : `<div class="feed-product-placeholder">No Image Available</div>`
+          }
         </div>
         <div class="feed-product-info">
           <h3 class="feed-product-title">${product.title}</h3>

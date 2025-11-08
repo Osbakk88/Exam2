@@ -110,6 +110,9 @@ function setupFilters() {
   const sortSelect = document.getElementById("sortSelect");
 
   // Search functionality
+  // Reference: Standard array filtering pattern for search implementations
+  // Pattern: toLowerCase() comparison with includes() for case-insensitive search
+  // Source inspiration: JavaScript array methods documentation and search tutorials
   searchInput.addEventListener("input", function (e) {
     const searchTerm = e.target.value.toLowerCase();
 

@@ -255,6 +255,51 @@
   }
 }
 
+/* Additional styles for simple login page */
+.auth-title {
+  text-align: center;
+  font-size: 2.5rem !important;
+  font-weight: 700 !important;
+  color: #000 !important;
+  margin-bottom: 0.5rem !important;
+  font-family: "Inter", sans-serif;
+}
+
+.auth-subtitle {
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 400;
+  color: #666;
+  margin-bottom: 2rem !important;
+  padding-bottom: 1rem !important;
+  border-bottom: 2px solid #000;
+  font-family: "Inter", sans-serif;
+}
+
+.input-hint {
+  color: #666;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+  display: block;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.margin-top {
+  margin-top: 1.5rem;
+}
+
+.no-decoration {
+  text-decoration: none;
+  color: inherit;
+}
+
+.no-decoration:hover {
+  text-decoration: none;
+}
+
 @media (max-width: 480px) {
   .auth-container {
     padding: 1.5rem !important;

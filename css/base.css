@@ -1,5 +1,7 @@
+/* Font Imports */
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap");
 
+/* Reset & Base Styles */
 * {
   margin: 0;
   padding: 0;
@@ -17,6 +19,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Typography */
 h1,
 h2,
 h3,
@@ -78,6 +81,7 @@ pre,
   font-size: 0.8rem;
 }
 
+/* Layout & Containers */
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -126,6 +130,7 @@ main {
   border: 0;
 }
 
+/* Responsive */
 @media (max-width: 1024px) {
   h1 {
     font-size: 2rem;

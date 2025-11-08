@@ -1,17 +1,23 @@
+/* First item needs special positioning due to Shopping Bag header */
 .item:first-child .buttons {
-  top: calc(50% - 11rem);
+  top: calc(50% - 6rem);
 }
 
 .item:first-child .image {
-  top: calc(50% - 11rem);
+  top: calc(50% - 6rem);
 }
 
-.item:last-child .buttons {
-  top: calc(50% - 9rem);
+.item:first-child .description {
+  position: absolute;
+  left: 410px;
+  top: calc(50% - 6rem);
+  transform: translateY(-50%);
+  margin-top: 0;
 }
 
-.item:last-child .image {
-  top: calc(50% - 9rem);
+.item:first-child .quantity {
+  top: calc(40% + 145px + 0.5rem);
+  left: 235px;
 }
 
 #main-content {
@@ -42,42 +48,7 @@
   border-bottom: 2px solid #2d2d2d;
 }
 
-.item:first-child .buttons {
-  top: calc(50% - 9rem);
-}
-
-.item:first-child .image {
-  top: calc(50% - 9rem);
-}
-
-.item:first-child .description {
-  margin-top: 10rem;
-  font-size: 1.5rem;
-}
-
-.item:first-child .description span:first-child {
-  font-size: 1.8rem;
-  font-weight: 700;
-}
-
-.item:first-child .description span:last-child {
-  font-size: 1.6rem;
-  font-weight: 700;
-}
-
-.item:first-child .quantity {
-  top: calc(80% - 15rem);
-}
-
-.item:first-child::after {
-  content: "";
-  position: absolute;
-  bottom: 30%;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background-color: #2d2d2d;
-}
+/* Consistent styling applied to all cart items below */
 
 .checkout-buttons-section {
   position: absolute;
@@ -118,17 +89,7 @@
   background: #e9ecef;
 }
 
-.item:first-child .total-price {
-  position: absolute;
-  bottom: 8rem;
-  left: 1.5rem;
-  right: 1.5rem;
-  text-align: center;
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: #000;
-  margin: 0;
-}
+/* Total price styling moved to general .total-price */
 
 .cart-container {
   padding: 2rem 0;
@@ -151,10 +112,20 @@
   min-height: 900px;
 }
 
+.item::after {
+  content: "";
+  position: absolute;
+  bottom: 12rem;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: #2d2d2d;
+}
+
 .buttons {
   position: absolute;
   left: 50px;
-  top: 50%;
+  top: calc(50% - 6rem);
   transform: translateY(-50%);
 }
 
@@ -184,7 +155,7 @@
   overflow: hidden;
   position: absolute;
   left: 90px;
-  top: 50%;
+  top: calc(50% - 6rem);
   transform: translateY(-50%);
 }
 
@@ -197,23 +168,25 @@
 .description {
   display: block;
   margin-bottom: 1rem;
-  margin-left: 410px;
-  margin-top: 10rem;
+  position: absolute;
+  left: 410px;
+  top: calc(50% - 6rem);
+  transform: translateY(-50%);
   overflow: hidden;
 }
 
 .description span:first-child {
   display: block;
-  font-size: 1.1rem;
-  font-weight: 600;
+  font-size: 1.6rem;
+  font-weight: 800;
   color: #333;
   margin-bottom: 0.5rem;
 }
 
 .description span:last-child {
   display: block;
-  font-size: 1rem;
-  font-weight: 700;
+  font-size: 1.4rem;
+  font-weight: 800;
   color: #000;
 }
 
@@ -223,8 +196,8 @@
   gap: 0.5rem;
   margin-right: 1rem;
   position: absolute;
-  left: 220px;
-  top: 80%;
+  left: 235px;
+  top: calc(40% + 145px + 0.5rem);
   transform: translateX(-50%);
   margin-top: 0;
 }
@@ -283,12 +256,15 @@
 }
 
 .total-price {
-  font-size: 1.1rem;
+  position: absolute;
+  bottom: 6rem;
+  left: 1.5rem;
+  right: 1.5rem;
+  text-align: center;
+  font-size: 1.4rem;
   font-weight: 700;
   color: #000;
-  display: inline-block;
-  margin-left: 410px;
-  margin-top: 1rem;
+  margin: 0;
 }
 
 .cart-summary-section {

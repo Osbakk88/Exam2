@@ -1,3 +1,4 @@
+/* Filters & Search */
 .filters-section {
   margin: 3rem 0;
   background: rgba(255, 255, 255, 0.9);
@@ -41,6 +42,7 @@
   cursor: pointer;
 }
 
+/* Products Grid */
 .products-section {
   margin: 2rem 0;
 }
@@ -158,6 +160,7 @@
   font-size: 0.9rem;
 }
 
+/* Responsive */
 @media (max-width: 768px) {
   .products-grid {
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
