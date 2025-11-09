@@ -323,16 +323,55 @@
     flex-direction: column;
     text-align: center;
     padding: 1.5rem 1rem;
+    min-height: auto !important;
+    position: relative;
+    display: flex;
+    align-items: center;
   }
 
+  /* Reset absolute positioning for mobile */
   .buttons {
-    position: static;
+    position: static !important;
     margin-bottom: 1rem;
+    transform: none !important;
+    top: auto !important;
+    left: auto !important;
   }
 
   .image {
-    width: 60px;
-    height: 60px;
+    position: static !important;
+    width: 120px !important;
+    height: 120px !important;
+    margin: 0 auto 1rem auto !important;
+    transform: none !important;
+    top: auto !important;
+    left: auto !important;
+  }
+
+  .description {
+    position: static !important;
+    transform: none !important;
+    top: auto !important;
+    left: auto !important;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .quantity {
+    position: static !important;
+    transform: none !important;
+    top: auto !important;
+    left: auto !important;
+    justify-content: center;
+    margin: 1rem 0;
+  }
+
+  .total-price {
+    position: static !important;
+    bottom: auto !important;
+    left: auto !important;
+    right: auto !important;
+    margin: 1rem 0;
   }
 
   .checkout-content {
@@ -342,5 +381,56 @@
 
   .checkout-actions {
     flex-direction: column;
+  }
+
+  /* Mobile-specific layout improvements */
+  .shopping-cart {
+    margin-top: 2rem;
+    padding: 0 1rem;
+  }
+
+  .empty-cart-state {
+    margin: 1rem;
+    padding: 2rem 1rem;
+  }
+
+  .cart-summary-section {
+    margin: 1rem;
+    padding: 1.5rem 1rem;
+  }
+}
+
+/* Additional mobile breakpoint for very small screens */
+@media (max-width: 480px) {
+  .item {
+    padding: 1rem 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .image {
+    width: 100px !important;
+    height: 100px !important;
+  }
+
+  .description span:first-child {
+    font-size: 1.2rem !important;
+  }
+
+  .description span:last-child {
+    font-size: 1rem !important;
+  }
+
+  .quantity input {
+    width: 35px;
+  }
+
+  .quantity button {
+    width: 24px;
+    height: 24px;
+  }
+
+  .checkout-actions .btn {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
   }
 }
