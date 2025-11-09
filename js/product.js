@@ -225,8 +225,6 @@ function updateActionButtons(product) {
       addToCartBtn.remove();
     }
   }
-
-
 }
 
 function buyNowProduct(product) {
@@ -288,7 +286,7 @@ function showNotification(message, type = "success") {
   const notification = document.createElement("div");
   notification.className = `notification ${type}`;
   notification.textContent = message;
-  
+
   notification.style.cssText = `
     position: fixed;
     top: 20px;
