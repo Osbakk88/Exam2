@@ -160,7 +160,9 @@ async function initializeCarousel() {
         carouselProducts.forEach((_, index) => {
           indicatorsHTML += `<button class="carousel-indicator ${
             index === 0 ? "active" : ""
-          }" onclick="goToSlide(${index})" aria-label="Go to slide ${index + 1}"></button>`;
+          }" onclick="goToSlide(${index})" aria-label="Go to slide ${
+            index + 1
+          }"></button>`;
         });
         indicators.innerHTML = indicatorsHTML;
       }
