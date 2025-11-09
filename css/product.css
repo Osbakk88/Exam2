@@ -528,9 +528,9 @@ button#clearCartBtn:hover {
 }
 
 .rating-text {
-  color: #666;
+  color: #333;
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .share-button {
