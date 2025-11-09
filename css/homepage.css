@@ -1248,7 +1248,7 @@
     .carousel-slide
     .slide-cta {
     position: absolute !important;
-    bottom: 2.5rem !important;
+    bottom: 1.5rem !important;
     left: 50% !important;
     transform: translateX(-50%) !important;
     font-size: 0.75rem !important;
@@ -1263,8 +1263,15 @@
     display: inline-block !important;
   }
 
-  /* Align description text to match image position */
-  html body .banner-carousel-section .carousel-wrapper .slide-description {
+  /* Align description text to match image position - MOBILE ONLY */
+  html body .banner-carousel-section .carousel-wrapper .slide-content p {
+    text-align: left !important;
+    padding-left: 0.5rem !important;
+    margin-left: 0 !important;
+    line-height: 1.4 !important;
+  }
+
+  html body .banner-carousel-section .carousel-wrapper .slide-content h2 {
     text-align: left !important;
     padding-left: 0.5rem !important;
     margin-left: 0 !important;

@@ -312,19 +312,11 @@ function renderCarousel() {
 // Pattern: setInterval for automatic slide progression with navigation function
 // Source inspiration: Carousel tutorials from web development blogs and JavaScript slider examples
 function startCarouselAutoplay() {
-  console.log(
-    "▶️ Starting carousel autoplay with",
-    carouselProducts.length,
-    "slides"
-  );
-
   if (carouselProducts.length <= 1) {
-    console.log("❌ Not enough slides for autoplay");
     return;
   }
 
   carouselInterval = setInterval(() => {
-    console.log("⏰ Autoplay: advancing slide");
     nextSlide();
   }, 5000); // Change slide every 5 seconds
 }
@@ -564,21 +556,17 @@ function showFeedError() {
 // Carousel navigation functions
 function nextSlide() {
   if (carouselProducts.length === 0) {
-    console.log("❌ No carousel products available for next slide");
     return;
   }
 
   const prevSlide = currentSlide;
   currentSlide = (currentSlide + 1) % carouselProducts.length;
 
-  // Explicit logging for looping behavior
+  // Log looping behavior for mobile testing
   if (prevSlide === carouselProducts.length - 1 && currentSlide === 0) {
-    console.log("🔄 Carousel LOOPED: Last slide → First slide");
+    console.log("🔄 MOBILE: Carousel looped back to first slide");
   }
 
-  console.log(
-    `🎠 Carousel: ${prevSlide} → ${currentSlide} (total: ${carouselProducts.length} slides)`
-  );
   updateCarouselDisplay();
 }
 
