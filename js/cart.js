@@ -39,8 +39,6 @@ function displayCart() {
   const cartSummary = document.getElementById("cartSummary");
   const emptyCart = document.getElementById("emptyCart");
 
-  console.log("📦 Cart items:", cartItems);
-
   if (cartItems.length === 0) {
     showEmptyCart();
     return;
@@ -72,8 +70,6 @@ function showEmptyCart() {
   // Hide cart summary and show empty cart
   cartSummary.style.display = "none";
   emptyCart.style.display = "block";
-
-  console.log("Showing empty cart state");
 }
 
 function createDesignmodoCartItem(item, isFirstItem = false) {

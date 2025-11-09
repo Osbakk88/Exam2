@@ -234,7 +234,6 @@
   line-height: 1;
 }
 
-/* Used AI to help me fix the issue with the minus sign not showing up in center */
 .quantity button:first-child::after {
   content: "-";
 }
@@ -318,98 +317,256 @@
   margin-bottom: 2rem;
 }
 
+/* MOBILE CART RESPONSIVE LAYOUT */
 @media (max-width: 768px) {
   .item {
-    flex-direction: column;
-    text-align: center;
-    padding: 1.5rem 1rem;
-    min-height: auto !important;
-    position: relative;
-    display: flex;
-    align-items: center;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    padding: 4rem 1rem 2rem 1rem !important;
+    min-height: 650px !important;
+    position: relative !important;
+    gap: 1.5rem !important;
+    margin-bottom: 3rem !important;
   }
 
-  /* Reset absolute positioning for mobile */
-  .buttons {
+  /* Reset positioning for main layout elements only */
+  .item .buttons,
+  .item .image,
+  .item .description,
+  .item .quantity,
+  .item .total-price {
     position: static !important;
-    margin-bottom: 1rem;
     transform: none !important;
     top: auto !important;
     left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
   }
 
+  /* Keep pseudo-element positioning for quantity buttons */
+  .quantity button {
+    position: relative !important;
+  }
+
+  .quantity button::after {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+  }
+
+  /* Mobile layout order using flexbox order */
+
+  /* Image container */
   .image {
-    position: static !important;
-    width: 120px !important;
-    height: 120px !important;
-    margin: 0 auto 1rem auto !important;
-    transform: none !important;
-    top: auto !important;
-    left: auto !important;
+    width: 180px !important;
+    height: 180px !important;
+    margin: 2rem auto 2rem auto !important;
+    border-radius: 10px !important;
+    overflow: hidden !important;
+    order: 1 !important;
+    position: relative !important;
   }
 
+  /* Position delete button right below the image */
+  .item .buttons {
+    position: static !important;
+    order: 2 !important; /* Right after image */
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    margin: 1rem 0 !important;
+  }
+
+  /* Delete button styling for mobile - smaller and over image */
+  .item .delete-btn {
+    position: static !important;
+    width: 24px !important;
+    height: 24px !important;
+    font-size: 14px !important;
+    background: rgba(220, 53, 69, 0.9) !important;
+    backdrop-filter: blur(2px) !important;
+  }
+
+  /* Product description - Third (after image and delete button) */
   .description {
-    position: static !important;
-    transform: none !important;
-    top: auto !important;
-    left: auto !important;
-    text-align: center;
-    margin-bottom: 1rem;
+    text-align: center !important;
+    margin: 0 0 2rem 0 !important;
+    width: 100% !important;
+    order: 3 !important;
+    padding: 0 1rem !important;
   }
 
+  .description span:first-child {
+    font-size: 1.4rem !important;
+    margin-bottom: 1rem !important;
+    display: block !important;
+  }
+
+  .description span:last-child {
+    font-size: 1.2rem !important;
+    display: block !important;
+  }
+
+  /* Quantity controls - Fourth */
   .quantity {
-    position: static !important;
-    transform: none !important;
-    top: auto !important;
-    left: auto !important;
-    justify-content: center;
-    margin: 1rem 0;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 1rem !important;
+    margin: 2rem 0 !important;
+    width: 100% !important;
+    order: 4 !important;
   }
 
+  /* Total price - Fifth */
   .total-price {
+    text-align: center !important;
+    margin: 2rem 0 !important;
+    width: 100% !important;
+    font-size: 1.4rem !important;
+    order: 5 !important;
+    padding: 1rem !important;
+    background: rgba(0, 0, 0, 0.05) !important;
+    border-radius: 8px !important;
+  }
+
+  /* Remove the ::after line */
+  .item::after {
+    display: none !important;
+  }
+
+  /* Checkout section - Sixth */
+  .checkout-content {
+    flex-direction: column !important;
+    gap: 1rem !important;
+    text-align: center !important;
+    order: 6 !important;
+  }
+
+  .checkout-actions {
+    flex-direction: column !important;
+    gap: 1rem !important;
+    order: 7 !important;
+  }
+
+  .checkout-actions .btn {
+    width: 100% !important;
+    padding: 1rem !important;
+    font-size: 1rem !important;
+  }
+
+  /* Cart summary section */
+  .cart-summary-section {
+    order: 8 !important;
+    position: relative !important;
+  }
+
+  /* Prevent overlapping issues */
+  .item {
+    z-index: 2 !important;
+    margin-bottom: 2rem !important;
+  }
+
+  /* Fix checkout buttons inside first cart item */
+  .checkout-buttons-section {
     position: static !important;
     bottom: auto !important;
     left: auto !important;
     right: auto !important;
-    margin: 1rem 0;
+    margin-top: 3rem !important;
+    padding: 2rem 1rem !important;
+    flex-direction: column !important;
+    order: 9 !important; /* Place after everything else */
+    width: 100% !important;
+    gap: 1.5rem !important;
   }
 
-  .checkout-content {
-    flex-direction: column;
-    gap: 1rem;
+  .checkout-buttons-section .btn {
+    width: 100% !important;
+    padding: 1.2rem !important;
+    font-size: 1.1rem !important;
+    margin: 0 !important;
+    border-radius: 8px !important;
   }
 
-  .checkout-actions {
-    flex-direction: column;
+  /* Make sure first item respects flexbox layout */
+  .item:first-child {
+    display: flex !important;
+    flex-direction: column !important;
   }
 
-  /* Mobile-specific layout improvements */
+  /* Override first-child specific positioning rules on mobile */
+  .item:first-child .image,
+  .item:first-child .description,
+  .item:first-child .quantity {
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
+  }
+
+  /* Ensure first-child image follows mobile layout order - pushed down */
+  .item:first-child .image {
+    width: 180px !important;
+    height: 180px !important;
+    margin: 4rem auto 2rem auto !important; /* Increased top margin from 2rem to 4rem */
+    border-radius: 10px !important;
+    overflow: hidden !important;
+    order: 1 !important;
+    position: relative !important;
+  }
+
+  /* First-child buttons follow same pattern */
+  .item:first-child .buttons {
+    position: static !important;
+    order: 2 !important;
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    margin: 1rem 0 !important;
+  }
+
+  /* Container improvements */
   .shopping-cart {
-    margin-top: 2rem;
-    padding: 0 1rem;
+    margin-top: 1rem !important;
+    padding: 0 0.5rem !important;
   }
 
   .empty-cart-state {
-    margin: 1rem;
-    padding: 2rem 1rem;
+    margin: 1rem 0.5rem !important;
+    padding: 2rem 1rem !important;
   }
 
   .cart-summary-section {
-    margin: 1rem;
-    padding: 1.5rem 1rem;
+    margin: 1rem 0.5rem !important;
+    padding: 1.5rem 1rem !important;
+  }
+
+  /* Main content spacing */
+  #main-content {
+    padding-top: 2rem !important;
   }
 }
 
-/* Additional mobile breakpoint for very small screens */
+/* Small mobile screens */
 @media (max-width: 480px) {
   .item {
-    padding: 1rem 0.5rem;
-    margin-bottom: 1rem;
+    padding: 4rem 1rem 2rem 1rem !important;
+    margin-bottom: 2rem !important;
+    min-height: 600px !important;
+    gap: 1rem !important;
   }
 
   .image {
-    width: 100px !important;
-    height: 100px !important;
+    width: 160px !important;
+    height: 160px !important;
+  }
+
+  .description {
+    padding: 0 0.5rem !important;
   }
 
   .description span:first-child {
@@ -421,16 +578,61 @@
   }
 
   .quantity input {
-    width: 35px;
+    width: 40px !important;
+    height: 35px !important;
   }
 
   .quantity button {
-    width: 24px;
-    height: 24px;
+    width: 35px !important;
+    height: 35px !important;
   }
 
-  .checkout-actions .btn {
-    padding: 0.6rem 1rem;
-    font-size: 0.9rem;
+  /* Delete button below image on small screens */
+  .item .buttons {
+    position: static !important;
+    order: 2 !important;
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    margin: 1rem 0 !important;
+  }
+
+  .item .delete-btn {
+    width: 22px !important;
+    height: 22px !important;
+    font-size: 12px !important;
+    background: rgba(220, 53, 69, 0.95) !important;
+  }
+
+  /* Override first-child image sizing on small screens - pushed down */
+  .item:first-child .image {
+    width: 160px !important;
+    height: 160px !important;
+    margin: 3rem auto 2rem auto !important; /* More top margin for smaller screens */
+  }
+
+  /* First-child buttons on small screens follow same pattern */
+  .item:first-child .buttons {
+    position: static !important;
+    order: 2 !important;
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    margin: 1rem 0 !important;
+  }
+
+  .checkout-buttons-section .btn {
+    padding: 1rem !important;
+    font-size: 1rem !important;
+  }
+
+  .shopping-cart {
+    padding: 0 0.5rem !important;
+  }
+
+  .empty-cart-state,
+  .cart-summary-section {
+    margin: 1rem 0.5rem !important;
+    padding: 2rem 1rem !important;
   }
 }
