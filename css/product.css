@@ -244,9 +244,9 @@
 .product-price-section .original-price {
   font-size: 1.4rem;
   text-decoration: line-through;
-  color: #a0aec0;
+  color: #555;
   margin-left: 1rem;
-  opacity: 0.8;
+  opacity: 0.9;
 }
 
 .product-price-section .price {
