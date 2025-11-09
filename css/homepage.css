@@ -1,4 +1,4 @@
-/* Carousel - Updated 2025-11-09 12:34 */
+/* Carousel - FORCE REFRESH 12:45 */
 .banner-carousel-section {
   position: relative;
   height: 500px;
@@ -1191,6 +1191,41 @@
 
   /* Move indicators down below price */
   .carousel-indicators {
+    bottom: 0.5rem !important;
+  }
+}
+
+/* FORCE MOBILE LAYOUT - Updated 12:45 */
+@media screen and (max-width: 480px) {
+  .banner-carousel-section .carousel-wrapper .carousel-slide .slide-price {
+    position: absolute !important;
+    bottom: 2.5rem !important;
+    left: 22.5% !important;
+    transform: translateX(-50%) !important;
+    font-size: 1.2rem !important;
+    font-weight: 700 !important;
+    color: white !important;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5) !important;
+    z-index: 102 !important;
+    margin: 0 !important;
+  }
+
+  .banner-carousel-section .carousel-wrapper .carousel-slide .slide-cta {
+    position: absolute !important;
+    bottom: 4.5rem !important;
+    left: 22.5% !important;
+    transform: translateX(-50%) !important;
+    font-size: 0.8rem !important;
+    padding: 0.6rem 1rem !important;
+    z-index: 102 !important;
+    background: rgba(255, 255, 255, 0.15) !important;
+    backdrop-filter: blur(20px) !important;
+    border: 2px solid rgba(255, 255, 255, 0.4) !important;
+    color: white !important;
+    border-radius: 30px !important;
+  }
+
+  .banner-carousel-section .carousel-indicators {
     bottom: 0.5rem !important;
   }
 }
