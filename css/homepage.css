@@ -1153,70 +1153,32 @@
     justify-content: flex-start !important;
   }
 
-  /* Reorganize text content for better mobile layout */
+  /* Smaller, more responsive text for mobile */
   .carousel-wrapper .slide-text h2 {
-    font-size: 1.1rem !important;
-    margin-bottom: 0.3rem !important;
+    font-size: 0.95rem !important;
+    margin-bottom: 0.2rem !important;
+    line-height: 1.1 !important;
+  }
+
+  .carousel-wrapper .slide-text p {
+    font-size: 0.75rem !important;
     line-height: 1.2 !important;
+    margin-bottom: 0.3rem !important;
   }
 
   .carousel-wrapper .slide-rating {
-    font-size: 0.7rem !important;
-    margin-bottom: 0.5rem !important;
+    font-size: 0.6rem !important;
+    margin-bottom: 0.3rem !important;
   }
 
-  /* Reposition price to be absolutely positioned */
-  .carousel-wrapper .slide-price {
-    position: absolute !important;
-    bottom: 2.5rem !important;
-    left: 22.5% !important;
-    transform: translateX(-50%) !important;
-    font-size: 1.2rem !important;
-    font-weight: 700 !important;
-    color: white !important;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5) !important;
-    z-index: 101 !important;
-    margin: 0 !important;
-  }
-
-  /* Center View Product button over the image area */
+  /* Center View Product button over the indicators */
   .banner-carousel-section .slide-cta {
     position: absolute !important;
-    bottom: 4.5rem !important;
-    left: 22.5% !important;
+    bottom: 3rem !important;
+    left: 50% !important;
     transform: translateX(-50%) !important;
-    font-size: 0.8rem !important;
-    padding: 0.6rem 1rem !important;
-    z-index: 101 !important;
-  }
-
-  /* Move indicators down below price */
-  .carousel-indicators {
-    bottom: 0.5rem !important;
-  }
-}
-
-/* MOBILE LAYOUT FIX - Constrain text height */
-@media screen and (max-width: 480px) {
-  /* Constrain text area to prevent button position changes */
-  .banner-carousel-section .slide-content {
-    height: 250px !important;
-    overflow: hidden !important;
-  }
-
-  .banner-carousel-section .slide-text {
-    height: 180px !important;
-    overflow: hidden !important;
-  }
-
-  /* Position button and price absolutely within slide */
-  .banner-carousel-section .slide-cta {
-    position: absolute !important;
-    bottom: 80px !important;
-    left: 22.5% !important;
-    transform: translateX(-50%) !important;
-    font-size: 0.8rem !important;
-    padding: 0.6rem 1rem !important;
+    font-size: 0.75rem !important;
+    padding: 0.5rem 1rem !important;
     z-index: 102 !important;
     background: rgba(255, 255, 255, 0.15) !important;
     backdrop-filter: blur(20px) !important;
@@ -1224,15 +1186,15 @@
     color: white !important;
     border-radius: 30px !important;
     text-decoration: none !important;
-    margin: 0 !important;
   }
 
-  .banner-carousel-section .slide-price {
+  /* Position price below the button, over indicators */
+  .carousel-wrapper .slide-price {
     position: absolute !important;
-    bottom: 40px !important;
-    left: 22.5% !important;
+    bottom: 1.8rem !important;
+    left: 50% !important;
     transform: translateX(-50%) !important;
-    font-size: 1.2rem !important;
+    font-size: 1rem !important;
     font-weight: 700 !important;
     color: white !important;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5) !important;
@@ -1240,7 +1202,21 @@
     margin: 0 !important;
   }
 
-  .banner-carousel-section .carousel-indicators {
-    bottom: 0.5rem !important;
+  /* Move indicators down below button and price */
+  .carousel-indicators {
+    bottom: 0.2rem !important;
+    gap: 0.2rem !important;
+  }
+
+  /* Make indicators smaller on mobile */
+  .carousel-indicator {
+    width: 4px !important;
+    height: 4px !important;
+    padding: 0 !important;
+    background: rgba(255, 255, 255, 0.5) !important;
+  }
+
+  .carousel-indicator.active {
+    background: rgba(255, 255, 255, 0.9) !important;
   }
 }
