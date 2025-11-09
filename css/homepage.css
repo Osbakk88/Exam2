@@ -1270,6 +1270,7 @@
   .banner-carousel-section .slide-content {
     padding-left: 0 !important;
     margin-left: 0 !important;
+    margin-top: 2rem !important;
     text-align: left !important;
   }
 
@@ -1277,6 +1278,7 @@
     text-align: left !important;
     margin-left: 0 !important;
     padding-left: 0 !important;
+    margin-top: 0 !important;
   }
 
   .banner-carousel-section .slide-content p {
