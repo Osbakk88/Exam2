@@ -574,7 +574,7 @@ function goToSlide(index) {
     return;
   }
 
-  currentSlide = index;
+  currentSlide = index % carouselProducts.length;
   updateCarouselDisplay();
 }
 

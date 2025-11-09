@@ -8,6 +8,15 @@
   z-index: 1;
 }
 
+/* Desktop image quality improvements */
+@media (min-width: 1025px) {
+  .slide-image img {
+    image-rendering: auto;
+    image-rendering: -webkit-optimize-contrast;
+    -ms-interpolation-mode: bicubic;
+  }
+}
+
 .carousel-container {
   position: relative;
   height: 100%;
@@ -80,12 +89,15 @@
 .slide-image img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  object-position: center;
   transition: transform 0.8s ease;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
 }
 
 .carousel-slide.active .slide-image img {
-  transform: scale(1.05);
+  transform: scale(1.02);
 }
 
 .slide-content {
@@ -986,8 +998,8 @@
 
 @media (max-width: 480px) {
   .banner-carousel-section {
-    height: 400px;
-    min-height: 400px;
+    height: 450px;
+    min-height: 450px;
     margin-bottom: 1.5rem;
   }
 
@@ -1059,8 +1071,8 @@
 /* Very small mobile devices */
 @media (max-width: 360px) {
   .banner-carousel-section {
-    height: 420px;
-    min-height: 420px;
+    height: 480px;
+    min-height: 480px;
   }
 
   .carousel-indicators {
