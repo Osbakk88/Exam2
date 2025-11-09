@@ -1,4 +1,4 @@
-/* Carousel - FORCE REFRESH 12:45 */
+/* Carousel - TEST UPDATE 12:47 */
 .banner-carousel-section {
   position: relative;
   height: 500px;
@@ -6,6 +6,7 @@
   overflow: hidden;
   margin-bottom: 4rem;
   z-index: 1;
+  border: 5px solid red; /* TEMPORARY TEST BORDER */
 }
 
 /* Desktop image quality improvements */
@@ -1195,24 +1196,23 @@
   }
 }
 
-/* FORCE MOBILE LAYOUT - Updated 12:45 */
+/* MOBILE LAYOUT FIX - Constrain text height */
 @media screen and (max-width: 480px) {
-  .banner-carousel-section .carousel-wrapper .carousel-slide .slide-price {
-    position: absolute !important;
-    bottom: 2.5rem !important;
-    left: 22.5% !important;
-    transform: translateX(-50%) !important;
-    font-size: 1.2rem !important;
-    font-weight: 700 !important;
-    color: white !important;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5) !important;
-    z-index: 102 !important;
-    margin: 0 !important;
+  /* Constrain text area to prevent button position changes */
+  .banner-carousel-section .slide-content {
+    height: 250px !important;
+    overflow: hidden !important;
   }
 
-  .banner-carousel-section .carousel-wrapper .carousel-slide .slide-cta {
+  .banner-carousel-section .slide-text {
+    height: 180px !important;
+    overflow: hidden !important;
+  }
+
+  /* Position button and price absolutely within slide */
+  .banner-carousel-section .slide-cta {
     position: absolute !important;
-    bottom: 4.5rem !important;
+    bottom: 80px !important;
     left: 22.5% !important;
     transform: translateX(-50%) !important;
     font-size: 0.8rem !important;
@@ -1223,6 +1223,21 @@
     border: 2px solid rgba(255, 255, 255, 0.4) !important;
     color: white !important;
     border-radius: 30px !important;
+    text-decoration: none !important;
+    margin: 0 !important;
+  }
+
+  .banner-carousel-section .slide-price {
+    position: absolute !important;
+    bottom: 40px !important;
+    left: 22.5% !important;
+    transform: translateX(-50%) !important;
+    font-size: 1.2rem !important;
+    font-weight: 700 !important;
+    color: white !important;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5) !important;
+    z-index: 102 !important;
+    margin: 0 !important;
   }
 
   .banner-carousel-section .carousel-indicators {
