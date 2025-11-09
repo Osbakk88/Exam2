@@ -1013,9 +1013,22 @@
   .banner-carousel-section .carousel-slide {
     padding: 1rem !important;
     flex-direction: row !important;
-    align-items: flex-start !important;
+    align-items: stretch !important;
     gap: 1rem !important;
     text-align: left !important;
+  }
+
+  /* Ensure mobile slides display properly */
+  .banner-carousel-section .carousel-slide.active {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: flex !important;
+  }
+
+  .banner-carousel-section .carousel-slide:not(.active) {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    display: none !important;
   }
 
   .banner-carousel-section .slide-image {
@@ -1034,6 +1047,8 @@
     background: transparent !important;
     padding: 0 !important;
     order: 2 !important;
+    margin-top: 2rem !important;
+    align-self: flex-start !important;
   }
 
   .slide-text h2 {
@@ -1266,25 +1281,30 @@
     display: inline-block !important;
   }
 
-  /* Align description text to match image position - MOBILE ONLY */
-  .banner-carousel-section .slide-content {
-    padding-left: 0 !important;
-    margin-left: 0 !important;
-    margin-top: 2rem !important;
-    text-align: left !important;
+  /* FORCE TEXT ALIGNMENT WITH IMAGE - MOBILE ONLY */
+  .banner-carousel-section .carousel-slide .slide-content {
+    margin-top: 5rem !important;
+    padding-top: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+  }
+
+  .banner-carousel-section .carousel-slide .slide-content .slide-text {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
   }
 
   .banner-carousel-section .slide-content h2 {
     text-align: left !important;
-    margin-left: 0 !important;
-    padding-left: 0 !important;
-    margin-top: 0 !important;
+    margin: 0 0 0.5rem 0 !important;
+    padding: 0 !important;
   }
 
   .banner-carousel-section .slide-content p {
     text-align: left !important;
-    margin-left: 0 !important;
-    padding-left: 0 !important;
+    margin: 0 0 0.5rem 0 !important;
+    padding: 0 !important;
     line-height: 1.4 !important;
   }
 }

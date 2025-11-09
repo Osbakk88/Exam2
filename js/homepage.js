@@ -313,17 +313,19 @@ function renderCarousel() {
 // Source inspiration: Carousel tutorials from web development blogs and JavaScript slider examples
 function startCarouselAutoplay() {
   if (carouselProducts.length <= 1) {
-    console.log("Not enough slides for autoplay");
+    console.log("❌ Not enough slides for autoplay");
     return;
   }
 
   // Clear any existing interval first
   if (carouselInterval) {
     clearInterval(carouselInterval);
+    carouselInterval = null;
   }
 
-  console.log("Starting carousel autoplay - will loop every 5 seconds");
+  console.log("✅ Starting carousel autoplay - will loop every 5 seconds");
   carouselInterval = setInterval(() => {
+    console.log("🔄 Auto-advancing carousel slide");
     nextSlide();
   }, 5000); // Change slide every 5 seconds
 }
@@ -605,6 +607,10 @@ function updateCarouselDisplay() {
     return;
   }
 
+  console.log(
+    `📱 Updating display: showing slide ${currentSlide} of ${slides.length}`
+  );
+
   slides.forEach((slide, index) => {
     const isActive = index === currentSlide;
 
@@ -614,6 +620,9 @@ function updateCarouselDisplay() {
     // Add active class to current slide
     if (isActive) {
       slide.classList.add("active");
+      console.log(`✅ Slide ${index} is now active`);
+    } else {
+      console.log(`⚪ Slide ${index} is inactive`);
     }
   });
 
@@ -841,6 +850,14 @@ function setupAutoplay() {
 
   startCarouselAutoplay();
 
+  // Add watchdog to ensure autoplay keeps running
+  setInterval(() => {
+    if (!carouselInterval && carouselProducts.length > 1) {
+      console.log("🐕 Watchdog: Restarting stuck autoplay");
+      startCarouselAutoplay();
+    }
+  }, 10000); // Check every 10 seconds
+
   // Pause on hover (desktop)
   const carouselContainer = document.querySelector(".banner-carousel-section");
   if (carouselContainer) {
@@ -857,14 +874,18 @@ function setupAutoplay() {
 
 function pauseAutoplay() {
   if (carouselInterval) {
+    console.log("⏸️ Pausing carousel autoplay");
     clearInterval(carouselInterval);
     carouselInterval = null;
   }
 }
 
 function resumeAutoplay() {
-  if (!carouselInterval && carouselProducts.length > 1) {
-    console.log("Resuming carousel autoplay");
-    startCarouselAutoplay();
-  }
+  // Add a small delay before resuming to prevent conflicts
+  setTimeout(() => {
+    if (!carouselInterval && carouselProducts.length > 1) {
+      console.log("▶️ Resuming carousel autoplay");
+      startCarouselAutoplay();
+    }
+  }, 100);
 }
