@@ -1005,32 +1005,35 @@
 
 @media (max-width: 480px) {
   .banner-carousel-section {
-    height: 500px;
-    min-height: 500px;
+    height: 500px !important;
+    min-height: 500px !important;
     margin-bottom: 1.5rem;
   }
 
-  .carousel-slide {
+  .banner-carousel-section .carousel-slide {
     padding: 1rem !important;
     flex-direction: row !important;
     align-items: flex-start !important;
     gap: 1rem !important;
+    text-align: left !important;
   }
 
-  .slide-image {
+  .banner-carousel-section .slide-image {
     flex: 0 0 45% !important;
     max-width: 45% !important;
     max-height: 200px !important;
     height: 200px !important;
     margin-top: 2rem !important;
+    order: 1 !important;
   }
 
-  .slide-content {
+  .banner-carousel-section .slide-content {
     flex: 1 1 55% !important;
     max-width: 55% !important;
-    position: static;
-    background: transparent;
-    padding: 0;
+    position: static !important;
+    background: transparent !important;
+    padding: 0 !important;
+    order: 2 !important;
   }
 
   .slide-text h2 {
@@ -1048,9 +1051,20 @@
     margin-bottom: 0.3rem;
   }
 
-  .slide-cta {
-    font-size: 0.85rem !important;
-    padding: 0.7rem 1.2rem !important;
+  .banner-carousel-section .slide-cta {
+    font-size: 0.9rem !important;
+    padding: 0.75rem 1.4rem !important;
+    background: rgba(255, 255, 255, 0.15) !important;
+    backdrop-filter: blur(20px) !important;
+    border: 2px solid rgba(255, 255, 255, 0.4) !important;
+    color: white !important;
+    text-decoration: none !important;
+    border-radius: 30px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    font-weight: 600 !important;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3) !important;
+    margin-top: 0.5rem !important;
   }
 
   .carousel-btn {
@@ -1108,5 +1122,32 @@
 
   .carousel-indicators {
     bottom: 4rem;
+  }
+}
+
+/* Mobile Final Override - Ensure mobile styles apply */
+@media screen and (max-width: 480px) {
+  .carousel-wrapper .carousel-slide {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: flex-start !important;
+    padding: 1rem !important;
+    gap: 1rem !important;
+  }
+
+  .carousel-wrapper .slide-image {
+    flex: 0 0 45% !important;
+    max-width: 45% !important;
+    height: 200px !important;
+    margin-top: 2rem !important;
+    display: block !important;
+  }
+
+  .carousel-wrapper .slide-content {
+    flex: 1 1 55% !important;
+    max-width: 55% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
   }
 }
