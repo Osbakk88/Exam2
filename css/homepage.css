@@ -1323,8 +1323,13 @@
     width: 100% !important;
   }
 
-  /* Match indicators to button styling - MOBILE ONLY */
-  .carousel-indicator {
+  /* Match indicators to button styling - MOBILE ONLY - PUBLISHED SITE FIX */
+  html
+    body
+    .banner-carousel-section
+    .carousel-wrapper
+    .carousel-indicators
+    .carousel-indicator {
     background: rgba(255, 255, 255, 0.15) !important;
     backdrop-filter: blur(20px) !important;
     border: 1px solid rgba(255, 255, 255, 0.4) !important;
@@ -1332,15 +1337,20 @@
     height: 6px !important;
   }
 
-  .carousel-indicator.active {
+  html
+    body
+    .banner-carousel-section
+    .carousel-wrapper
+    .carousel-indicators
+    .carousel-indicator.active {
     background: rgba(255, 255, 255, 0.25) !important;
     border: 2px solid rgba(255, 255, 255, 0.6) !important;
     transform: scale(1.3) !important;
     box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3) !important;
   }
 
-  /* Match arrow buttons to button styling - MOBILE ONLY */
-  .carousel-btn {
+  /* Match arrow buttons to button styling - MOBILE ONLY - PUBLISHED SITE FIX */
+  html body .banner-carousel-section .carousel-wrapper .carousel-btn {
     background: rgba(255, 255, 255, 0.15) !important;
     backdrop-filter: blur(20px) !important;
     border: 2px solid rgba(255, 255, 255, 0.4) !important;
@@ -1349,12 +1359,21 @@
     height: 50px !important;
   }
 
-  .carousel-btn:hover,
-  .carousel-btn:focus {
+  html body .banner-carousel-section .carousel-wrapper .carousel-btn:hover,
+  html body .banner-carousel-section .carousel-wrapper .carousel-btn:focus {
     background: rgba(255, 255, 255, 0.25) !important;
     border: 2px solid rgba(255, 255, 255, 0.6) !important;
     transform: translateY(-50%) scale(1.1) !important;
     box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3) !important;
+  }
+
+  /* Additional button ID targeting for published site */
+  html body #prevBtn,
+  html body #nextBtn {
+    background: rgba(255, 255, 255, 0.15) !important;
+    backdrop-filter: blur(20px) !important;
+    border: 2px solid rgba(255, 255, 255, 0.4) !important;
+    color: white !important;
   }
 
   /* ADDITIONAL OVERRIDE FOR PUBLISHED SITE - Nov 9 2025 */
